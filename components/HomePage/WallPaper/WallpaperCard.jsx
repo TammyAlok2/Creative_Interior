@@ -27,7 +27,7 @@ const WallpaperCard = ({ primary, hover, title }) => {
           />
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-          <h3 className="text-white text-lg font-semibold">{title}</h3>
+          <h3 className="text-white text-sm font-semibold">{title}</h3>
         </div>
         <button
           onClick={handleLikeClick}

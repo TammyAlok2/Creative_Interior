@@ -1,106 +1,126 @@
 'use client'
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const ProductCategories = () => {
   const products = [
     {
-      title: 'Decking',
+      title: 'Wallpaper',
       image: '/images/Category/category1.jpg',
-      alt: 'Wooden decking with planters'
+      alt: 'Modern living room with decorative wallpaper'
     },
     {
-      title: 'HPL Cladding',
+      title: 'Wooden Flooring',
       image: '/images/Category/category2.jpg',
-      alt: 'Building with modern cladding'
+      alt: 'Wooden flooring in room'
     },
     {
-      title: 'Instafix Mouldings',
+      title: 'WPC Wall Cladding',
       image: '/images/Category/category3.jpg',
-      alt: 'Decorative wall mouldings'
+      alt: 'Building with WPC wall cladding'
     },
-     {
-      title: 'Decking',
+    {
+      title: 'Wallpaper',
       image: '/images/Category/category1.jpg',
-      alt: 'Wooden decking with planters'
+      alt: 'Modern living room with decorative wallpaper'
     },
     {
-      title: 'HPL Cladding',
+      title: 'Wooden Flooring',
       image: '/images/Category/category2.jpg',
-      alt: 'Building with modern cladding'
+      alt: 'Wooden flooring in room'
     },
     {
-      title: 'Instafix Mouldings',
+      title: 'WPC Wall Cladding',
       image: '/images/Category/category3.jpg',
-      alt: 'Decorative wall mouldings'
+      alt: 'Building with WPC wall cladding'
     }
   ];
 
-  const scrollLeft = () => {
-    const slider = document.getElementById('slider');
-    slider.scrollLeft = slider.scrollLeft - 300;
-  };
-
-  const scrollRight = () => {
-    const slider = document.getElementById('slider');
-    slider.scrollLeft = slider.scrollLeft + 300;
-  };
-
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <div className="flex items-center gap-4 mb-2">
-          <div className="w-12 h-12">
-            <svg viewBox="0 0 24 24" className="w-full h-full text-blue-400">
-              <rect x="4" y="4" width="16" height="16" rx="2" fill="currentColor" />
-            </svg>
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
+        {/* Left Side - Header Section */}
+        <div className="lg:w-1/4 lg:sticky lg:top-4">
+          <div className="flex items-start gap-6 mb-4">
+            {/* Icon */}
+            <div className="w-12 h-12 flex-shrink-0">
+              <svg viewBox="0 0 24 24" className="w-full h-full text-sky-400">
+                <rect x="4" y="4" width="16" height="16" rx="2" fill="currentColor" />
+              </svg>
+            </div>
+            {/* Title */}
+            <div>
+              <h2 className="text-sky-400 text-4xl font-bold mb-1">Product</h2>
+              <p className="text-sky-400 text-xl font-light">by categories</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-blue-400 text-2xl font-medium">Product</h2>
-            <p className="text-blue-400">by categories</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            <span className="text-gray-600">200 +</span>
+          
+          {/* Product Count */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-gray-900 font-semibold">200 +</span>
             <span className="text-gray-500">Unique products</span>
           </div>
-        </div>
-        <button className="mt-4 text-gray-900 font-medium flex items-center">
-          ALL CATEGORIES
-          <ChevronRight className="w-4 h-4 ml-1" />
-        </button>
-      </div>
-
-      <div className="relative">
-      
-        
-        <div 
-          id="slider" 
-          className="flex overflow-x-auto gap-6 scroll-smooth hide-scrollbar"
-          style={{ scrollBehavior: 'smooth' }}
-        >
-          {products.map((product, index) => (
-            
-            <Card key={index} className="min-w-[300px] bg-white">
-              <CardContent className="p-0">
-                <div className="aspect-video relative">
-                  <img
-                    src={product.image}
-                    alt={product.alt}
-                    className="w-full h-full object-cover rounded-t-lg"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-xl font-medium">{product.title}</h3>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          
+          {/* Categories Link */}
+          <button className="text-gray-900 font-medium border-b-2 border-orange-500 pb-1 inline-flex items-center hover:text-orange-500 transition-colors group">
+            ALL CATEGORIES
+            <ChevronRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
 
-     
+        {/* Right Side - Swiper */}
+        <div className="lg:w-3/4 relative group">
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={24}
+            slidesPerView={1}
+            navigation={{
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            }}
+            breakpoints={{
+              280: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              997: { slidesPerView: 3 },
+              1373: {slidesPerView: 4},
+              1480: { slidesPerView: 4 },
+              1580: { slidesPerView: 5 },
+            }}
+            className="!px-1"
+          >
+            {products.map((product, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl group/card cursor-pointer">
+                  <div className="aspect-[4/3] relative overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.alt}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-600 group-hover/card:text-orange-500 transition-colors">
+                      {product.title}
+                    </h3>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+
+            {/* Custom Navigation Buttons */}
+            <button className="swiper-button-prev opacity-0 group-hover:opacity-100 transition-all duration-300 absolute top-1/2 -left-4 transform -translate-y-1/2 z-10 w-5 h-5 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110">
+              <ChevronLeft className="w-3 h-3 text-white" />
+            </button>
+            <button className="swiper-button-next opacity-0 group-hover:opacity-100 transition-all duration-300 absolute top-1/2 -right-4 transform -translate-y-1/2 z-10 w-5 h-5 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110">
+              <ChevronRight className="w-3 h-3 text-white" />
+            </button>
+          </Swiper>
+        </div>
       </div>
     </div>
   );

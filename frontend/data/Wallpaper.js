@@ -6,20 +6,7 @@ const Wallpapers = [
       hover: '/images/HomePage/WallPaper/Wall1-Hover.jpg',
            category: 'Premium Wallpapers'
     },
-    {
-      id: 2,
-      title: 'Tropical Trees and Plants',
-      primary: '/images/HomePage/WallPaper/Wall2.jpg',
-      hover: '/images/HomePage/WallPaper/Wall2-Hover.jpg',
-          category: 'Premium Wallpapers'
-    },
-    {
-      id: 3,
-      title: 'Explorer, 3D Landscape',
-      primary: '/images/HomePage/WallPaper/Wall3.jpg',
-      hover: '/images/HomePage/WallPaper/Wall3-Hover.jpg',
-          category: 'Premium Wallpapers'
-    },
+    
     {
         id: 4,
         title: 'Explorer, 3D Landscape',
@@ -250,6 +237,20 @@ const Wallpapers = [
                 primary: '/images/HomePage/WallPaper/Wall7.jpg',
                 hover: '/images/HomePage/WallPaper/Wall7-Hover.jpg',
                 category:'Canvas'
+              },
+              {
+                id: 2,
+                title: 'Tropical Trees and Plants',
+                primary: '/images/HomePage/WallPaper/Wall2.jpg',
+                hover: '/images/HomePage/WallPaper/Wall2-Hover.jpg',
+                    category: 'Premium Wallpapers'
+              },
+              {
+                id: 3,
+                title: 'Explorer, 3D Landscape',
+                primary: '/images/HomePage/WallPaper/Wall3.jpg',
+                hover: '/images/HomePage/WallPaper/Wall3-Hover.jpg',
+                    category: 'Premium Wallpapers'
               },
              
            

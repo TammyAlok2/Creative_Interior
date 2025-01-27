@@ -27,7 +27,7 @@ const MaterialSlider = () => {
       {
         id:4,
         image: "/images/SingleProduct/WallPaper/Material/material4.png",
-        label: "Premium Canvas Texture",
+        label: "Premium Canvas",
         price: 990.0,
         ribbon: "70"
       },
@@ -53,7 +53,7 @@ const MaterialSlider = () => {
   };
 
   return (
-    <div className="space-y-4 bg-white p-4 rounded-lg">
+    <div className="space-y-4 bg-white p-4 rounded-lg ">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Choose a material</h2>
         <div className="flex gap-2">

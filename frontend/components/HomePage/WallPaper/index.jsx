@@ -1,36 +1,36 @@
-'use client'
-import { useState } from 'react';
-import WallpaperCard from './WallpaperCard';
-import { Loader2 } from 'lucide-react';
-import Wallpapers from '@/data/Wallpaper';
+"use client";
+import { useState } from "react";
+import WallpaperCard from "./WallpaperCard";
+import { Loader2 } from "lucide-react";
+import Wallpapers from "@/data/Wallpaper";
+import Link from "next/link";
 
 const WallpaperGrid = () => {
-  const [activeCategory, setActiveCategory] = useState('Premium Wallpapers');
+  const [activeCategory, setActiveCategory] = useState("Premium Wallpapers");
   const [isLoading, setIsLoading] = useState(false);
 
   const categories = [
-    'Premium Wallpapers',
-    'Wallpaper Rolls',
-    'Blinds',
-    'Canvas'
+    "Premium Wallpapers",
+    "Wallpaper Rolls",
+    "Blinds",
+    "Canvas",
   ];
 
   // Sample data - replace with your backend data
-  
 
   const handleCategoryChange = async (category) => {
     setIsLoading(true);
     setActiveCategory(category);
-    
+
     // Simulate API call - replace with actual backend call
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
     setIsLoading(false);
   };
 
   // Filter wallpapers based on active category
   const filteredWallpapers = Wallpapers.filter(
-    wallpaper => wallpaper.category === activeCategory
+    (wallpaper) => wallpaper.category === activeCategory
   );
 
   return (
@@ -43,9 +43,10 @@ const WallpaperGrid = () => {
               key={category}
               onClick={() => handleCategoryChange(category)}
               className={`px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 whitespace-nowrap
-                ${activeCategory === category
-                  ? 'bg-white text-red-600 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
+                ${
+                  activeCategory === category
+                    ? "bg-white text-red-600 shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
             >
               {category}
@@ -56,11 +57,10 @@ const WallpaperGrid = () => {
 
       {/* Title and Description */}
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold mb-3">
-          {activeCategory}
-        </h1>
+        <h1 className="text-3xl font-bold mb-3">{activeCategory}</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Redefine luxury with our {activeCategory.toLowerCase()} — where walls become works of art.
+          Redefine luxury with our {activeCategory.toLowerCase()} — where walls
+          become works of art.
         </p>
       </div>
 
@@ -75,13 +75,15 @@ const WallpaperGrid = () => {
       ) : (
         /* Wallpaper Grid */
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredWallpapers.map((wallpaper) => (
-            <WallpaperCard
-              key={wallpaper.id}
-              primary={wallpaper.primary}
-              hover={wallpaper.hover}
-              title={wallpaper.title}
-            />
+          {filteredWallpapers.map((wallpaper,index) => (
+            <Link href="/wallpaper/multiple">
+              <WallpaperCard
+                key={index}
+                primary={wallpaper.primary}
+                hover={wallpaper.hover}
+                title={wallpaper.title}
+              />
+            </Link>
           ))}
         </div>
       )}
@@ -101,9 +103,10 @@ const Categories = ({ categories, activeCategory, onCategoryChange }) => {
             key={category}
             onClick={() => onCategoryChange(category)}
             className={`px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 whitespace-nowrap
-              ${activeCategory === category
-                ? 'bg-white text-red-600 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+              ${
+                activeCategory === category
+                  ? "bg-white text-red-600 shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
           >
             {category}

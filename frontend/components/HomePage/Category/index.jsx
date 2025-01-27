@@ -74,7 +74,7 @@ const ProductCategories = () => {
         </div>
 
         {/* Right Side - Swiper */}
-        <div className="lg:w-3/4 relative group">
+        <div className="w-3/4 max-lg:w-full relative group">
           <Swiper
             modules={[Navigation]}
             spaceBetween={24}
@@ -84,9 +84,9 @@ const ProductCategories = () => {
               prevEl: '.swiper-button-prev',
             }}
             breakpoints={{
-              280: { slidesPerView: 1 },
-              640: { slidesPerView: 2 },
-              997: { slidesPerView: 3 },
+              280: { slidesPerView: 2 },
+              640: { slidesPerView: 3 },
+              997: { slidesPerView: 4 },
               1373: {slidesPerView: 4},
               1480: { slidesPerView: 4 },
               1580: { slidesPerView: 5 },

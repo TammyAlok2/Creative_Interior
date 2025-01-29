@@ -13,7 +13,11 @@ export default {
   			foreground: 'var(--foreground)',
   			primary: 'var(--primary)',
   			secondary: 'var(--secondary)',
-  			accent: 'var(--accent)'
+  			accent: 'var(--accent)',
+			orange: {
+				orange500: "#F97316",
+				orange600: "#EA580C"
+			}
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

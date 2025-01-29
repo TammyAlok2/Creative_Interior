@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Heart, Share2, ShoppingCart } from "lucide-react";
 import MaterialSlider from "./MaterialSlider";
 import ProductGallery from "./ProductGalleryImage";
-import { productData } from "@/data/productData";
+import { productData } from "../../../data/productData";
 
 const ProductDetail = () => {
   const [width, setWidth] = useState("10");

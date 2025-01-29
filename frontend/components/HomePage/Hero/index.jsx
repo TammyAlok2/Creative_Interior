@@ -94,7 +94,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="bg-orange-500 text-white px-6 py-2 md:px-8 md:py-3 rounded-lg hover:bg-orange-600 transition-colors flex items-center space-x-2 mx-auto md:mx-0"
+                className="bg-orange-orange500 text-white px-6 py-2 md:px-8 md:py-3 rounded-lg hover:bg-orange-orange600 transition-colors flex items-center space-x-2 mx-auto md:mx-0"
               >
                 <span>Shop now</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

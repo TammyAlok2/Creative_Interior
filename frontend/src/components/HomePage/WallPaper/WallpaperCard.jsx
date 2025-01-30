@@ -1,4 +1,5 @@
 'use client'
+
 import { useWishlistStore } from '@/stores/wishlistStore';
 import { useState } from 'react';
 import CardButton from './ProductCardButton';
@@ -39,7 +40,7 @@ const WallpaperCard = ({ data }) => {
       >
         <div className="relative w-full h-full overflow-hidden rounded-lg">
             <img
-              src={isHovering ? data?.images[0]?.secure_url : data?.images[0]?.secure_url}
+              src={isHovering ? data?.images[0]?.secure_url : data?.images[1]?.secure_url}
               alt={data?.name}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
             />

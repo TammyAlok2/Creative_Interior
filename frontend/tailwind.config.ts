@@ -63,12 +63,6 @@ module.exports = {
           Alice: "#F0F8FF",
           dark: "#0073CF"
         },
-        orange: "#ff914d",
-        "bg-color-dark": "#171C28",
-        "body-color": {
-          DEFAULT: "#788293",
-          dark: "#959CB1",
-        },
         stroke: {
           stroke: "#E3E8EF",
           dark: "#353943",

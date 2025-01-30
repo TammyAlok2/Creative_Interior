@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+}
+
+@layer components {
+  input[type="checkbox"]:checked~label span svg {
+    @apply inline-flex;
+  }
+
+  .sticky .header-logo {
+    @apply py-5 lg:py-2;
+  }
+
+  .sticky .menu-scroll.active {
+    @apply opacity-70;
+  }
+
+  input#togglePlan:checked~.dot {
+    @apply translate-x-full;
+  }
+
+  input#checkboxLabel:checked~.box span {
+    @apply opacity-100;
+  }
+}
+
+/* This will apply to all text selections across the app */
+::selection {
+  background-color: black;
+  color: white;
+}
+
+/*end*/
+
+.swiperSlide {
+  width: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-width {
+  width: 90%;
+}
+
+/* Tailwind CSS Global Styles */
+.toast-container {
+  z-index: 9999;
+}
+
+/* .swiper-button-next{} */
+
+/* Customize the default bullet style */
+.swiper-pagination {
+  height: 2rem;
+  backdrop-filter: blur(.5rem);
+  background-color: rgba(0, 0, 0, 0.096);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 50%;
+}
+
+.swiper-pagination-bullet {
+  width: 22px;
+  height: 22px;
+  background: white;
+  border: 4px solid rgb(255, 255, 255);
+  /* Add a transparent border */
+  opacity: 1;
+  /* Make bullets fully visible */
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+
+/* Style for the active bullet */
+.swiper-pagination-bullet-active {
+  background: #ffffff;
+  /* Change active bullet color (green in this case) */
+  transform: scale(1.5);
+  /* Scale up the active bullet */
+  border-color: #ffffff;
+  /* Add a border to active bullet */
+}
+
+/* Dynamic resizing effect for bullets */
+.swiper-pagination-bullet-active-main {
+  width: 26px;
+  height: 26px;
+}
+
+/* common properties */
+
+.box-shadow {
+  box-shadow: 0 0 .5rem 0 #d3d3d380;
+}

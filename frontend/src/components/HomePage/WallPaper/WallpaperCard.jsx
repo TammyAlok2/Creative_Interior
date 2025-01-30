@@ -1,15 +1,33 @@
 'use client'
+import { useWishlistStore } from '@/stores/wishlistStore';
 import { useState } from 'react';
-const WallpaperCard = ({ primary, hover, title }) => {
+import CardButton from './ProductCardButton';
+const WallpaperCard = ({ data }) => {
     const [isHovering, setIsHovering] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
   
     const handleLikeClick = (e) => {
       e.preventDefault();
+      if (!isLiked) {
+        // If not currently liked, add to wishlist
+        addToWishlist(data);
+      } else {
+        // If currently liked, remove from wishlist
+        removeFromWishlist(data._id);
+      }
+  
+      // Toggle the liked state
       setIsLiked(!isLiked);
     };
+
+    // console.log("data", data)
+
+    const {addToWishlist, removeFromWishlist, wishlist} = useWishlistStore();
+
+    // console.log("wishlist data", wishlist)
   
     return (
+      <>
       <div
         className="relative group rounded-lg overflow-hidden cursor-pointer"
         onMouseEnter={() => setIsHovering(true)}
@@ -20,14 +38,14 @@ const WallpaperCard = ({ primary, hover, title }) => {
         }}
       >
         <div className="relative w-full h-full overflow-hidden rounded-lg">
-          <img
-            src={isHovering ? hover : primary}
-            alt={title}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
-          />
+            <img
+              src={isHovering ? data?.images[0]?.secure_url : data?.images[0]?.secure_url}
+              alt={data?.name}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
+            />
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-          <h3 className="text-white text-sm font-semibold">{title}</h3>
+          <h3 className="text-white text-sm font-semibold">{data?.name}</h3>
         </div>
         <button
           onClick={handleLikeClick}
@@ -37,7 +55,7 @@ const WallpaperCard = ({ primary, hover, title }) => {
         >
           <svg
             className={`w-6 h-6 transition-colors ${
-              isLiked ? 'text-white' : 'text-white'
+              isLiked ? 'text-white' : ''
             }`}
             fill={isLiked ? 'currentColor' : 'none'}
             stroke="currentColor"
@@ -52,6 +70,8 @@ const WallpaperCard = ({ primary, hover, title }) => {
           </svg>
         </button>
       </div>
+        <CardButton product={data} />
+      </>
     );
   };
   

@@ -4,6 +4,7 @@ import WallpaperCard from "./WallpaperCard";
 import { Loader2 } from "lucide-react";
 import Wallpapers from "../../../data/Wallpaper";
 import Link from "next/link";
+import { useProductDataStore } from "@/stores/productStore";
 
 const WallpaperGrid = () => {
   const [activeCategory, setActiveCategory] = useState("Premium Wallpapers");
@@ -32,6 +33,9 @@ const WallpaperGrid = () => {
   const filteredWallpapers = Wallpapers.filter(
     (wallpaper) => wallpaper.category === activeCategory
   );
+
+  const {product} = useProductDataStore();
+  console.log("allProduct", product)
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -75,12 +79,10 @@ const WallpaperGrid = () => {
       ) : (
         /* Wallpaper Grid */
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredWallpapers.map((wallpaper,index) => (
-            <Link href="/wallpaper/multiple" key={index}>
+          {product.map((wallpaper,index) => (
+            <Link href={`/wallpaper/multiple/${wallpaper?._id}`} key={index}>
               <WallpaperCard
-                primary={wallpaper.primary}
-                hover={wallpaper.hover}
-                title={wallpaper.title}
+                data={wallpaper}
               />
             </Link>
           ))}

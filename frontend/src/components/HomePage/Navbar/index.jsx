@@ -1,8 +1,10 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Search, ChevronDown } from 'lucide-react';
+import { useWishlistStore } from '@/stores/wishlistStore';
+import { useCartStore } from '@/stores/cartStore';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,6 +48,30 @@ const Navbar = () => {
   const toggleDropdown = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
+
+  const {wishlist} = useWishlistStore();
+
+  const { items } = useCartStore();
+
+  // Wishlist count state
+  const [wishlistCount, setWishlistCount] = useState("");
+  const [cartCount, setCartCount] = useState("");
+
+  useEffect(() => {
+    setCartCount(items.length > 0 ? items.length : "");
+  }, [items]);
+
+  // console.log(wishlist.products.length)
+  // console.log(wishlist.products)
+
+  useEffect(() => {
+      setWishlistCount(
+        wishlist?.products?.length > 0 ? wishlist?.products?.length : ""
+      )
+  }, [wishlist]);
+
+  console.log("wishlistdata: ", wishlistCount)
+  console.log("cartCount: ", cartCount)
 
   return (
     <nav className="fixed top-0 w-full bg-white z-50 px-2 sm:px-4 lg:px-6 py-2 sm:py-4 shadow-md">
@@ -168,17 +194,20 @@ const Navbar = () => {
               <span className="hidden lg:inline ml-1">Login</span>
             </span>
           </Link>
-          <Link href="/wishlist" className="hover:text-orange-500">
+          <Link href="/wishlist" className="relative hover:text-orange-500">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
+            <span className="absolute -top-2 -right-2 bg-orange-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {wishlistCount}
+            </span>
           </Link>
           <Link href="/cart" className="relative hover:text-orange-500">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
-            <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              0
+            <span className="absolute -top-2 -right-2 bg-orange-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {cartCount}
             </span>
           </Link>
 

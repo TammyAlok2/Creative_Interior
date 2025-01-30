@@ -1,13 +1,44 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { Heart, Share2, ShoppingCart } from "lucide-react";
 import MaterialSlider from "./MaterialSlider";
 import ProductGallery from "./ProductGalleryImage";
-import { productData } from "@/data/productData";
+import { useParams } from "next/navigation";
+import { useProductDataStore } from "../../../stores/productStore"
+// import { productData } from "@/data/productData";
 
 const ProductDetail = () => {
   const [width, setWidth] = useState("10");
   const [height, setHeight] = useState("10");
+
+  const [products, setProducts] = useState(null);
+
+  const { product } = useProductDataStore();
+  
+  // Get the ID from URL
+  const params = useParams();
+  const id = params?.id;
+  
+  console.log("product_id: ", id)
+
+  // Find the product from productCategories when component mounts
+  useEffect(() => {
+    if (id) {
+      // Assuming productCategories is an array of products
+      const foundProduct = product.find(
+        product => product._id === id || product.id === id
+      );
+      setProducts(foundProduct);
+    }
+  }, [id]);
+  console.log("products hai:", products)
+
+  // Add loading state
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="max-w-7xl mx-auto p-4 bg-red-50 mt-[5rem]">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -20,7 +51,7 @@ const ProductDetail = () => {
             <div className="inline-block bg-red-600 text-white px-2 py-1 text-sm rounded-md">
               Seamless
             </div>
-            <h1 className="text-2xl font-bold mt-2">{productData.title}</h1>
+            {/* <h1 className="text-2xl font-bold mt-2">{productData.title}</h1> */}
             <div className="flex items-center mt-2">
               <div className="flex items-center">
                 {[...Array(5)].map((_, idx) => (
@@ -29,18 +60,18 @@ const ProductDetail = () => {
                   </span>
                 ))}
               </div>
-              <span className="ml-2 text-gray-600">
+              {/* <span className="ml-2 text-gray-600">
                 ({productData.reviews})
-              </span>
+              </span> */}
             </div>
-            <div className="mt-2">
+            {/* <div className="mt-2">
               <span className="text-gray-500 line-through">
                 ₹{productData.originalPrice}
               </span>
               <span className="ml-2 text-xl font-bold">
                 ₹{productData.salePrice}
               </span>
-            </div>
+            </div> */}
           </div>
 
           {/* Material Selection */}
@@ -102,7 +133,7 @@ const ProductDetail = () => {
             <h2 className="text-lg font-semibold ">Final Total : </h2>
             <span className="text-lg  mt-2">
               {" "}
-              Rs {productData?.salePrice * height * width}{" "}
+              {/* Rs {productData?.salePrice * height * width}{" "} */}
             </span>
           </div>
 
@@ -122,7 +153,7 @@ const ProductDetail = () => {
 
           {/* Features */}
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-4  p-4 rounded-lg">
-            {productData.features.map((feature, idx) => (
+            {/* {productData.features.map((feature, idx) => (
               <div key={idx} className="flex flex-col items-center text-center">
                 <div className="w-12 h-12 bg-gray-100 rounded-full mb-2">
                   <img
@@ -133,7 +164,7 @@ const ProductDetail = () => {
                 </div>
                 <span className="text-xs">{feature.text}</span>
               </div>
-            ))}
+            ))} */}
           </div>
 
           {/* Description */}

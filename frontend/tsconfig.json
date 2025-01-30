@@ -25,6 +25,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/HomePage/Product-Card/Pr.tsx", "src/app/dashboard/order/[id]/ordersinglepagecomponents/OrderRatings"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/HomePage/Product-Card/Pr.tsx", "src/app/dashboard/order/[id]/ordersinglepagecomponents/OrderRatings", "src/components/HomePage/WallPaper/ProductCardButton.jsx"],
   "exclude": ["node_modules"]
 }

@@ -17,6 +17,8 @@ import { allAdminOrders } from '../controllers/order.controllers.js';
 import { allUsers } from '../controllers/authentication.controllers.js';
 import { getAddressesById } from '../controllers/address.controllers.js';
 import { createEnquiry, deleteEnquiry, getAllEnquiries, updateEnquiry } from '../controllers/enquiry.controller.js';
+import { createMaterial, deleteMaterial, getAllMaterials, getMaterialById, updateMaterial } from '../controllers/productMaterial.controllers.js';
+import { createService, deleteService, getAllServices, getServiceById, updateService } from '../controllers/productService.controllers.js';
 
 const router = express.Router();
 
@@ -68,3 +70,19 @@ router.get('/allEnquiry',authorizeRoles("admin"),getAllEnquiries)
 router.post('/add-enquiry',createEnquiry)
 router.delete('/delete-enquiry',authorizeRoles("admin"),deleteEnquiry)
 router.put('/update-enquiry',authorizeRoles("admin"),updateEnquiry)
+
+
+// all product materials 
+router.get("/allMaterials",getAllMaterials)
+router.post("/add-material",upload.single("image"),isLoggedIn,authorizeRoles("admin"),createMaterial)
+router.delete("/delete-material/:id",isLoggedIn,authorizeRoles("admin"),deleteMaterial)
+router.put("/update-material/:id",upload.single("image"),isLoggedIn,authorizeRoles("admin"),updateMaterial)
+router.get("/getMaterial/:id",getMaterialById)
+
+ // all prouct services 
+ router.get("/allServices",getAllServices)
+ router.post("/add-service",upload.single("image"),isLoggedIn,authorizeRoles("admin"),createService)
+ router.delete("/delete-service/:id",isLoggedIn,authorizeRoles("admin"),deleteService)
+ router.put("/update-service/:id",upload.single("image"),isLoggedIn,authorizeRoles("admin"),updateService)
+ router.get("/getService/:id",getServiceById)
+

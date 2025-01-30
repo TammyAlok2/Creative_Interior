@@ -42,6 +42,15 @@ const productSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
     },
+    materialsAvailable: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ProductMaterial",
+        required: [true, "Material is required"]
+      }
+    ],
+
+    
     ratings: {
       type: Number,
       default: 0,
@@ -49,8 +58,8 @@ const productSchema = new mongoose.Schema(
       max: [5, "Ratings cannot be more than 5"],
     },
     numberOfReviews: {
-type:Number,
-default:0
+      type: Number,
+      default: 0
     },
     images: [
       {
@@ -70,6 +79,23 @@ default:0
         ref: "Review",
       },
     ],
+
+    shipping: {
+      type: Number,
+      default: 0,
+    },
+    orginCountry: {
+      type: String,
+      default: "INDIA"
+    },
+    manufacturerCountry: {
+      type: String,
+      default: "INDIA",
+    },
+    brand: {
+      type: String,
+      default: "Creative Interiors"
+    },
     specifications: [
       {
         key: {

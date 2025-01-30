@@ -27,11 +27,6 @@ v2.config({
 
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://bomboo-world-ix9u.vercel.app',
-    'www.bombooworld.com',
-    'https://bombooworld.com',
-    'https://www.bombooworld.com',
-    'https://admin.bombooworld.com',
     'http://localhost:3001'
 ];
 

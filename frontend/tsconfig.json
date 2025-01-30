@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/singleproduct/[id]/subcomponents/specification/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

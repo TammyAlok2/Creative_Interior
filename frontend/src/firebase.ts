@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth"; // Add this for authentication//
 // update packages  // updaet
 
 const firebaseConfig = {
-  apiKey: "AIzaSyClG9EbU9n_3tyAOiV2MJADnp9YV5gUh2Q",
-  authDomain: "bombooworld-ba410.firebaseapp.com",
-  projectId: "bombooworld-ba410",
-  storageBucket: "bombooworld-ba410.firebasestorage.app",
-  messagingSenderId: "1055253396005",
-  appId: "1:1055253396005:web:b629f6b117a15ce437ddcc",
-  measurementId: "G-1342KP4ZW0"
+  apiKey: "AIzaSyAi5_R3mdUXTTpen8MddCAfM1suYjsX6SY",
+  authDomain: "creative-interior-c2ade.firebaseapp.com",
+  projectId: "creative-interior-c2ade",
+  storageBucket: "creative-interior-c2ade.firebasestorage.app",
+  messagingSenderId: "1094735596413",
+  appId: "1:1094735596413:web:c245a33d114cb5255d9a14",
+  measurementId: "G-V5KV67CRSE"
 };
 
 // Initialize Firebase  

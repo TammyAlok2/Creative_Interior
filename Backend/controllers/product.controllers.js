@@ -18,14 +18,31 @@ export const addProduct = asyncHandler(async (req, res, next) => {
     category,
     subCategory,
     specifications,
-    materialsAvailable,
-    servicesAvailable
   } = req.body;
 
-  console.log(req.body);
+  let materialsAvailable = [];
+  let servicesAvailable = [];
+
+  // Parse materialsAvailable if it's a string
+  try {
+    materialsAvailable = typeof req.body.materialsAvailable === 'string' 
+      ? JSON.parse(req.body.materialsAvailable)
+      : req.body.materialsAvailable || [];
+  } catch (error) {
+    return next(new AppError("Invalid materialsAvailable format", 400));
+  }
+
+  // Parse servicesAvailable if it's a string
+  // try {
+  //   servicesAvailable = typeof req.body.servicesAvailable === 'string'
+  //     ? JSON.parse(req.body.servicesAvailable)
+  //     : req.body.servicesAvailable || [];
+  // } catch (error) {
+  //   return next(new AppError("Invalid servicesAvailable format", 400));
+  // }
 
   // Validation: Check for required fields
-  if (!name || !description || price === undefined || stock === undefined || !category || !materialsAvailable || !materialsAvailable.length) {
+  if (!name || !description || price === undefined || stock === undefined || !category || !Array.isArray(materialsAvailable) || !materialsAvailable.length) {
     return next(new AppError("All required fields must be provided including at least one material", 400));
   }
 
@@ -33,7 +50,7 @@ export const addProduct = asyncHandler(async (req, res, next) => {
   try {
     const materialIds = materialsAvailable.map(id => new mongoose.Types.ObjectId(id));
     const existingMaterials = await ProductMaterial.find({ _id: { $in: materialIds } });
-
+    
     if (existingMaterials.length !== materialsAvailable.length) {
       return next(new AppError("One or more materials do not exist", 400));
     }
@@ -41,22 +58,25 @@ export const addProduct = asyncHandler(async (req, res, next) => {
     console.error("Material validation failed:", error);
     return next(new AppError("Invalid material IDs provided", 400));
   }
-  try {
-    const servicesIds = servicesAvailable.map(id => new mongoose.Types.ObjectId(id));
-    const existingServices = await ProductService.find({ _id: { $in: servicesIds } });
-    if (existingServices.length !== servicesAvailable.length) {
-      return next(new AppError("One or more services do not exist", 400));
-    }
 
-  }
-  catch (error) {
-    console.error("Services validation failed:", error);
-    return next(new AppError("Invalid material IDs provided", 400));
-  }
+  // Validate services if provided
+  // if (servicesAvailable.length > 0) {
+  //   try {
+  //     const servicesIds = servicesAvailable.map(id => new mongoose.Types.ObjectId(id));
+  //     const existingServices = await ProductService.find({ _id: { $in: servicesIds } });
+      
+  //     if (existingServices.length !== servicesAvailable.length) {
+  //       return next(new AppError("One or more services do not exist", 400));
+  //     }
+  //   } catch (error) {
+  //     console.error("Services validation failed:", error);
+  //     return next(new AppError("Invalid service IDs provided", 400));
+  //   }
+  // }
 
   const images = [];
-
-  // Check if files were uploaded
+  
+  // Handle image uploads
   if (req.files && req.files.length > 0) {
     try {
       for (const file of req.files) {
@@ -93,13 +113,13 @@ export const addProduct = asyncHandler(async (req, res, next) => {
     const populatedProduct = await Product.findById(product._id)
       .populate('materialsAvailable', 'name price')
       .populate('category', 'name')
-      .populate('servicesAvailable', 'name image')
-      .populate('subCategory', 'name');
+      // .populate('servicesAvailable', 'name image')
+      // .populate('subCategory', 'name');
 
     res.status(201).json(new AppResponse(201, populatedProduct, "Product added successfully"));
   } catch (error) {
     console.error("Product creation failed:", error);
-    next(new AppError("Failed to add product. Please try again.", 500));
+    return next(new AppError("Failed to add product. Please try again.", 500));
   }
 });
 

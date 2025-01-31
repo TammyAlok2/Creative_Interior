@@ -147,7 +147,6 @@ const ProductDetail = () => {
                   <input
                     type="number"
                     value={width}
-                    inputmode="numeric" 
                     onChange={(e) => setWidth(e.target.value)}
                     className="w-full p-2 no-spinner border rounded-lg"
                   />

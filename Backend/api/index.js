@@ -27,7 +27,8 @@ v2.config({
 
 const allowedOrigins = [
     'http://localhost:3000',
-    'http://localhost:3001'
+    'http://localhost:3001',
+    'https://creative-interior.vercel.app'
 ];
 
 app.use(

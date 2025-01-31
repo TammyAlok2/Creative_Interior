@@ -1,6 +1,6 @@
 // In a separate file like axiosConfig.ts
 import axios from 'axios';
-export const API_URL = 'http://localhost:5000/api/v1/'; // 'http://localhost:5000/api/v1/'; //https://api.bombooworld.com/api/v1/
+export const API_URL = 'https://creative-interior.onrender.com/api/v1/'; // 'http://localhost:5000/api/v1/'; //https://api.bombooworld.com/api/v1/
 // updated base url
 const axiosInstance = axios.create({
   baseURL: API_URL,

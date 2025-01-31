@@ -23,7 +23,7 @@ export default function OrderTrackingCard({ orderDetails }: any) {
   return (
     <div className="rounded-lg lg:w-[45rem] 2xl:w-[52rem] max-[1001px]:w-full bg-white box-shadow p-[1rem] hover:scale-[1.02] transition-all duration-300 ease-in-out border">
       <div className="flex flex-col gap-4 items-start justify-between bg-white rounded-lg max-[976px]:flex-col">
-      <Link href={`/singleproduct/${productData?._id}`}>
+      <Link href={`/wallpaper/multiple/${productData?._id}`}>
         <div className="flex gap-4 items-start">
           {productData?.images?.[0]?.secure_url ? (
             <Image

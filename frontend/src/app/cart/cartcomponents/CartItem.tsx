@@ -30,7 +30,7 @@ const CartItem: React.FC<CartItemProps> = ({
 
   return (
     <div className="flex gap-[1rem] border max-[787px]:flex-col max-[788px]:items-start lg:flex-row justify-between items-center p-4 border-b box-shadow rounded-xl">
-      <Link href={`/singleproduct/${id}`}>
+      <Link href={`/wallpaper/multiple/${id}`}>
       <div className="flex items-center space-x-4 mb-4 lg:mb-0">
       <Image
           width="100"

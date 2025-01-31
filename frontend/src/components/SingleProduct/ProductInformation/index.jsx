@@ -147,10 +147,11 @@ const ProductDetail = () => {
                   <input
                     type="number"
                     value={width}
+                    inputmode="numeric" 
                     onChange={(e) => setWidth(e.target.value)}
-                    className="w-full p-2 border rounded-lg"
+                    className="w-full p-2 no-spinner border rounded-lg"
                   />
-                  <span className="absolute right-3 top-2 text-gray-500">
+                  <span className="absolute right-1 top-2 text-gray-500">
                     ft
                   </span>
                 </div>
@@ -163,8 +164,9 @@ const ProductDetail = () => {
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
                     className="w-full p-2 border rounded-lg"
+                    
                   />
-                  <span className="absolute right-3 top-2 text-gray-500">
+                  <span className="absolute right-1 top-2 text-gray-500">
                     ft
                   </span>
                 </div>

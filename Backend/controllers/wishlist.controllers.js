@@ -7,9 +7,9 @@ import AppResponse from '../utils/AppResponse.js';
 // Add product to wishlist
 export const addProductToWishlist = asyncHandler(async (req, res, next) => {
   const { productId } = req.params;
-  console.log(productId)
+ // console.log(productId)
   const userId = req.user.id;
-  console.log(userId)
+ // console.log(userId)
 
   // Validate product ID
   if (!productId) {

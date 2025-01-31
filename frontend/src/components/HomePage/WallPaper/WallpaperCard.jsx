@@ -72,7 +72,7 @@ const WallpaperCard = ({ data }) => {
           </svg>
         </button>
       </div>
-        <CardButton product={data} />
+        {/* <CardButton product={data} /> */}
       </>
     );
   };

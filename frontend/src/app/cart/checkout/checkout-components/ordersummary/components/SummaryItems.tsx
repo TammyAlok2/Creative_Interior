@@ -14,7 +14,7 @@ const SummaryItems: React.FC<SummaryItemsProps> = ({ OrderDetailsData }) => {
             {OrderDetailsData?.map((item:any, index:number) => (
     
                 <div key={index} className="flex justify-between items-start py-2">
-                     <Link href={`/singleproduct/${item?.product?._id}`}>
+                     <Link href={`/wallpaper/multiple/${item?.product?._id}`}>
                     <div className='flex gap-2'>
                         <Image width={55} height={55} src={item?.product?.images[0]?.secure_url} className="rounded-lg" alt='product-image' />
                         <div className='flex flex-col justify-around'>

@@ -10,8 +10,12 @@ import { Heart, Share2, ShoppingCart, Star, StarHalf } from "lucide-react";
 import { useCartStore } from "../../../stores/cartStore"
 import { useWishlistStore } from "../../../stores/wishlistStore"
 import Link from "next/link";
+<<<<<<< HEAD
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 // import { productData } from "@/data/productData";
+=======
+import { productData } from "@/data/productData";
+>>>>>>> 19de55d3533be481282b9769e2a41650d6b1a54e
 
 const ProductDetail = () => {
   const [width, setWidth] = useState("10");
@@ -90,6 +94,7 @@ const ProductDetail = () => {
   const { items, addItem } = useCartStore();
 
   // Check if the product is already in the cart
+<<<<<<< HEAD
   const isProductInCart = items.some(item => item?.product?.id === id || item?.product?._id === id);
   console.log("isProductInCart: ", products)
 
@@ -109,7 +114,15 @@ const ProductDetail = () => {
     } else {
       removeFromWishlist(products?._id);
     }
+=======
+  const isProductInCart = items.some(item =>  item?.product?._id === products?._id);
+
+  const handleAddToCart = () => {
+    addItem(products);
+>>>>>>> 19de55d3533be481282b9769e2a41650d6b1a54e
   };
+
+
 
   return (
     <div className="max-w-7xl mx-auto p-4 bg-red-50 mt-[5rem]">
@@ -139,14 +152,14 @@ const ProductDetail = () => {
                 Average Rating: {products?.ratings?.toFixed(1) || "0.0"} out of 5
               </div>
             </div>
-            {/* <div className="mt-2">
+            <div className="mt-2">
               <span className="text-gray-500 line-through">
-                ₹{productData.originalPrice}
+                ₹{products?.price + 100}
               </span>
               <span className="ml-2 text-xl font-bold">
-                ₹{productData.salePrice}
+                ₹{products?.price}
               </span>
-            </div> */}
+            </div>
           </div>
 
           {/* Material Selection */}
@@ -208,7 +221,7 @@ const ProductDetail = () => {
             <h2 className="text-lg font-semibold ">Final Total : </h2>
             <span className="text-lg  mt-2">
               {" "}
-              {/* Rs {productData?.salePrice * height * width}{" "} */}
+              Rs {parseInt(products?.price ||1)* height * width}{" "}
             </span>
           </div>
 
@@ -245,7 +258,7 @@ const ProductDetail = () => {
 
           {/* Features */}
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-4  p-4 rounded-lg">
-            {/* {productData.features.map((feature, idx) => (
+            {productData.features.map((feature, idx) => (
               <div key={idx} className="flex flex-col items-center text-center">
                 <div className="w-12 h-12 bg-gray-100 rounded-full mb-2">
                   <img
@@ -256,7 +269,7 @@ const ProductDetail = () => {
                 </div>
                 <span className="text-xs">{feature.text}</span>
               </div>
-            ))} */}
+            ))}
           </div>
 
           {/* Description */}

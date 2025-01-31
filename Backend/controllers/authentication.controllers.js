@@ -147,7 +147,7 @@ export const googleSignup = asyncHandler(async (req, res, next) => {
       email,
       password
     );
-    console.log("user creddentioal ", userCredential);
+   // console.log("user creddentioal ", userCredential);
 
     // Send email verification
     await sendEmailVerification(userCredential.user);

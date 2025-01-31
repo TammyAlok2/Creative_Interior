@@ -310,7 +310,7 @@ export const deleteProduct = asyncHandler(async (req, res, next) => {
 export const deleteProductImage = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const { publicId } = req.params;
-  console.log(id, publicId)
+ // console.log(id, publicId)
   try {
     const product = await Product.findById(id);
     if (!product) {

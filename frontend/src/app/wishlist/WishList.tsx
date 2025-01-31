@@ -1,56 +1,79 @@
 'use client';
 
-import React from "react";
+import React, { useEffect } from "react";
 import ProductItem from "../dashboard/wishlist/wishlistcomponents/ProductItem";
 import { useWishlistStore } from "@/stores/wishlistStore";
-
+import { useProductDataStore } from "@/stores/productStore";
 
 interface WishlistTitleProps {
   wishlistTitle: {
     title: string;
   };
 }
- // update some thing 1 
+
 interface WishlistItem {
-  id: string;
+  _id: string;
   image: string;
   name: string;
-  price?: number; // Optional if WishList doesn't include price
-  description?: string; // Optional if WishList doesn't include description
-  rating?: number; // Optional if WishList doesn't include rating
+  price?: number;
+  description?: string;
+  rating?: number;
 }
 
 const Wishlist: React.FC<WishlistTitleProps> = ({ wishlistTitle }) => {
-
   const { wishlist, removeFromWishlist } = useWishlistStore();
-  // console.log(wishlist)
+  const { product } = useProductDataStore();
+  const [processedProducts, setProcessedProducts] = React.useState<WishlistItem[]>([]);
 
   const handleDelete = (id: string) => {
-    removeFromWishlist(id); // Update Zustand store directly
+    removeFromWishlist(id);
   };
+
+  useEffect(() => {
+    if (!wishlist?.products || !product || !Array.isArray(product)) {
+      setProcessedProducts([]);
+      return;
+    }
+
+    const processed = wishlist.products
+      .map((wishlistItem: any) => {
+        if (!wishlistItem) return null;
+
+        const matchingProduct = product.find((p: any) => {
+          if (!p || !p._id) return false;
+          return p._id === wishlistItem;
+        });
+
+        if (matchingProduct) {
+          return {
+            _id: matchingProduct._id || '',
+            image: matchingProduct.images?.[0] || '',
+            name: matchingProduct.name || '',
+            // price: matchingProduct.price || 0,
+            description: matchingProduct.description || '',
+            rating: matchingProduct.rating || 0
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
+
+    setProcessedProducts(processed);
+  }, [wishlist, product]);
 
   return (
     <div className="max-w-7xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">{wishlistTitle.title as any}</h1>
+      <h1 className="text-3xl font-bold mb-4">{wishlistTitle?.title}</h1>
       <div className="space-y-4">
-        {/* {wishlistProducts.map((product, index) => ( */}
-        {wishlist.length === 0 ? (
+        {processedProducts?.length === 0 ? (
           <p>Your wishlist is empty!</p>
         ) : (
-          wishlist.map((item:any, index:number) => (
-
-            //@ts-ignore
+          processedProducts?.map((item: WishlistItem, index: number) => (
             <ProductItem
-              key={index}
-              id={item.id}
-              image={item.image}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-              rating={item.rating}
-              onDelete={() => handleDelete(item.id)}
+              key={item}
+              product={item}
+              onDelete={() => handleDelete(item)}
             />
-            // ))}
           ))
         )}
       </div>

@@ -6,7 +6,9 @@ import CardButton from './ProductCardButton';
 const WallpaperCard = ({ data }) => {
     const [isHovering, setIsHovering] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
-  
+    
+    const {addToWishlist, removeFromWishlist, wishlist} = useWishlistStore();
+    console.log(wishlist)
     const handleLikeClick = (e) => {
       e.preventDefault();
       if (!isLiked) {
@@ -23,7 +25,6 @@ const WallpaperCard = ({ data }) => {
 
     // console.log("data", data)
 
-    const {addToWishlist, removeFromWishlist, wishlist} = useWishlistStore();
 
     // console.log("wishlist data", wishlist)
   

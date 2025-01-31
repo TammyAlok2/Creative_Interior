@@ -56,9 +56,10 @@ export const useWishlistStore = create<WishlistState>((set, get) => ({
   addToWishlist: async (product) => {
     set({ loading: true, error: null });
     try {
+      console.log("my wishlist: ", product)
       const response = await axiosInstance.post(
         `user/addItemsToWishList/${product._id}`, 
-        {},
+        { productId: product._id },
         { withCredentials: true }
       );
 // alert('added to wishlist')

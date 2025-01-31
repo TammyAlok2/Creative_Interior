@@ -27,9 +27,10 @@ const ProductItem: React.FC<ProductItemProps> = ({
 }) => {
 
   
-  const { _id, images, name, price, description, rating} = product;
+  // const { _id, images, name, description, rating} = product;
+  console.log("product hai na: ", product)
   // Use fallback values if prices are undefined or null
-  const formattedOriginalPrice = price ? price.toFixed(2) : "0.00";
+  // const formattedOriginalPrice = price ? price.toFixed(2) : "0.00";
 
   const addItemToCart = useCartStore((state) => state.addItem);
 
@@ -59,9 +60,9 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <p className="max-[1268px]:block min-[1268px]:hidden max-[1145px]:hidden">{description.slice(0,70)}...</p>
           <p className="max-[1146px]:block min-[1146px]:hidden max-[609px]:hidden">{description.slice(0,40)}...</p>
           <p className="max-[610px]:block min-[610px]:hidden">{description.slice(0,10)}...</p>
-          <p className="text-gray-500">
+          {/* <p className="text-gray-500">
             <span>₹{formattedOriginalPrice || '1000'}</span>
-          </p>
+          </p> */}
         </div>
         </div>
       </div>

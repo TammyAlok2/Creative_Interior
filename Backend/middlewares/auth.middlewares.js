@@ -8,7 +8,7 @@ export const isLoggedIn = asyncHandler(async (req, _res, next) => {
   // extracting token from the cookies
 
   const { token } = req.cookies;
-  console.log(token)
+ // console.log(token)
 
   // If no token send unauthorized message
   if (!token) {

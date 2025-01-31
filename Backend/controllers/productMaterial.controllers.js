@@ -7,7 +7,7 @@ import ProductMaterial from "../models/productMaterial.models.js";
 // Create a new material
 export const createMaterial = asyncHandler(async (req, res, next) => {
     const { name, price, description } = req.body;
-    console.log(name,price)
+   // console.log(name,price)
 
     // Validation: Check for required fields
     if (!name || price === undefined) {

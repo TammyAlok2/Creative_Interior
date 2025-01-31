@@ -6,6 +6,7 @@ import MaterialSlider from "./MaterialSlider";
 import ProductGallery from "./ProductGalleryImage";
 import { useParams } from "next/navigation";
 import { useProductDataStore } from "../../../stores/productStore"
+import { useMaterialStore } from "../../../stores/materialStore"
 import { Heart, Share2, ShoppingCart, Star, StarHalf } from "lucide-react";
 import { useCartStore } from "../../../stores/cartStore"
 import { useWishlistStore } from "../../../stores/wishlistStore"
@@ -26,7 +27,7 @@ const ProductDetail = () => {
   const params = useParams();
   const id = params?.id;
 
-  console.log("product_data: ", products)
+  // console.log("product_data: ", products)
 
   // Find the product from productCategories when component mounts
   useEffect(() => {
@@ -90,7 +91,7 @@ const ProductDetail = () => {
 
   const { items, addItem } = useCartStore();
   const { wishlist, addToWishlist, removeFromWishlist } = useWishlistStore();
-  console.log("wishlist hai yaar: ", wishlist)
+  // console.log("wishlist hai yaar: ", wishlist)
 
   // Check if the product is already in the cart
   const isProductInCart = items.some(item => item?.product?._id === products?._id);
@@ -110,6 +111,9 @@ const ProductDetail = () => {
     }
   };
 
+  const { materials } = useMaterialStore();
+  console.log("materials: ", materials)
+  
   return (
     <div className="max-w-7xl mx-auto p-4 bg-red-50 mt-[5rem]">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -235,11 +239,11 @@ const ProductDetail = () => {
             </button> */}
 
             <button
-                onClick={toggleLike}
-                className={`right-4 text-3xl ${isLiked ? "text-red" : "text-gray-dark"}`}
-              >
-                {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
-              </button>
+              onClick={toggleLike}
+              className={`right-4 text-3xl ${isLiked ? "text-red" : "text-gray-dark"}`}
+            >
+              {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
+            </button>
 
             <button className="p-3 border border-gray-200 rounded-lg bg-white">
               <Share2 className="w-5 h-5" />

@@ -7,6 +7,7 @@ import { useWishlistStore } from "@/stores/wishlistStore";
 import { useCartStore } from "@/stores/cartStore";
 import { useAuthStore } from "@/stores/authStore";
 import LargeDeviceSearch from "./components/largedevicesearch/page";
+import SmallDeviceSearch from "./components/smalldevicesearch/page";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -172,13 +173,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-2 sm:space-x-4">
           <LargeDeviceSearch />
 
-          {/* mobile search button */}
-          <button
-            className="lg:hidden hover:text-orange-orange500"
-            onClick={() => setIsSearchOpen(!isSearchOpen)}
-          >
-            <Search className="w-6 h-6" />
-          </button>
+          <SmallDeviceSearch setIsSearchOpen={setIsSearchOpen} isSearchOpen={isSearchOpen}/>
 
           {user ? (
             <Link href="/dashboard/profilesection" className="hover:text-orange-orange500">
@@ -261,46 +256,11 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+
         </div>
       </div>
 
-      {/* Mobile Search Bar */}
-      <div
-        className={`lg:hidden absolute left-0 right-0 bg-white px-4 py-2 shadow-md transition-all duration-300 ease-in-out ${isSearchOpen
-            ? "translate-x-0 opacity-100"
-            : "translate-x-full opacity-0 pointer-events-none"
-          }`}
-      >
-        <div className="flex items-center space-x-2">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full px-4 py-2 border rounded-lg"
-          />
-          <button className="bg-black text-white p-2 rounded-lg flex-shrink-0">
-            <Search className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
+
 
       {/* Mobile Menu */}
       {isMenuOpen && (
@@ -333,8 +293,8 @@ const Navbar = () => {
                         <span>{item.title}</span>
                         <ChevronDown
                           className={`w-4 h-4 transform transition-transform ${activeDropdown === `shop-${index}`
-                              ? "rotate-180"
-                              : ""
+                            ? "rotate-180"
+                            : ""
                             }`}
                         />
                       </button>

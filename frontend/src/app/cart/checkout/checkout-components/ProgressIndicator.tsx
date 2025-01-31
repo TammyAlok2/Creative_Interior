@@ -5,7 +5,7 @@ export default function ProgressIndicator() {
         <div className="flex items-center space-x-4 mb-6 max-[468px]:hidden">
             <div className="flex items-center space-x-1">
                 <span className="text-sm font-semibold text-gray-dark">Address</span>
-                <div className="w-4 h-4 bg-medium_primary rounded-full"></div>
+                <div className="w-4 h-4 bg-orange-orange500 rounded-full"></div>
             </div>
             <div className="w-20 border-t border-gray-mediumLight"></div>
             <div className="flex items-center space-x-1">

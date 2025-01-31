@@ -139,7 +139,7 @@ export default function OrderSinglePage() {
     <div className="py-[8rem]">
       <div className="w-[88%] mx-auto">
         {/* Breadcrumb */}
-        <div className="font-semibold text-primary mb-4 flex items-center gap-2">
+        <div className="font-semibold text-orange-orange500 mb-4 flex items-center gap-2">
           <Link href={"/"}>
             <AiFillHome className="text-[1.2rem] hover:opacity-[0.8] mt-[-.3rem] text-gray-medium" />
           </Link>{" "}

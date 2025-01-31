@@ -6,6 +6,7 @@ import { Search, ChevronDown } from "lucide-react";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { useCartStore } from "@/stores/cartStore";
 import { useAuthStore } from "@/stores/authStore";
+import LargeDeviceSearch from "./components/largedevicesearch/page";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,20 +87,20 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-          <Link href="/" className="text-orange-500 whitespace-nowrap">
+          <Link href="/" className="text-orange-orange500 whitespace-nowrap">
             Home
           </Link>
 
           {/* Shop Dropdown */}
           <div className="relative group">
-            <button className="flex items-center text-gray-800 group-hover:text-orange-500 space-x-1">
+            <button className="flex items-center text-gray-800 group-hover:text-orange-orange500 space-x-1">
               <span>Shop</span>
               <ChevronDown className="w-4 h-4" />
             </button>
             <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 transition-all duration-300">
               {menuItems.shop.items.map((item, index) => (
                 <div key={index} className="relative group/sub px-4 py-2">
-                  <div className="flex items-center justify-between hover:text-orange-500 cursor-pointer">
+                  <div className="flex items-center justify-between hover:text-orange-orange500 cursor-pointer">
                     <span>{item.title}</span>
                     <ChevronDown className="w-4 h-4" />
                   </div>
@@ -108,7 +109,7 @@ const Navbar = () => {
                       <Link
                         key={subIndex}
                         href={`/shop/${subItem.toLowerCase()}`}
-                        className="block px-4 py-2 hover:text-orange-500"
+                        className="block px-4 py-2 hover:text-orange-orange500"
                       >
                         {subItem}
                       </Link>
@@ -121,14 +122,14 @@ const Navbar = () => {
 
           <Link
             href="/contact"
-            className="text-gray-800 hover:text-orange-500 whitespace-nowrap"
+            className="text-gray-800 hover:text-orange-orange500 whitespace-nowrap"
           >
             Contact
           </Link>
 
           {/* Products Dropdown */}
           <div className="relative group">
-            <button className="flex items-center text-gray-800 group-hover:text-orange-500 space-x-1">
+            <button className="flex items-center text-gray-800 group-hover:text-orange-orange500 space-x-1">
               <span>Products</span>
               <ChevronDown className="w-4 h-4" />
             </button>
@@ -137,7 +138,7 @@ const Navbar = () => {
                 <Link
                   key={index}
                   href={`/products/${item.toLowerCase().replace(" ", "-")}`}
-                  className="block px-4 py-2 hover:text-orange-500 whitespace-nowrap"
+                  className="block px-4 py-2 hover:text-orange-orange500 whitespace-nowrap"
                 >
                   {item}
                 </Link>
@@ -147,7 +148,7 @@ const Navbar = () => {
 
           {/* More Dropdown */}
           <div className="relative group">
-            <button className="flex items-center text-gray-800 group-hover:text-orange-500 space-x-1">
+            <button className="flex items-center text-gray-800 group-hover:text-orange-orange500 space-x-1">
               <span>More</span>
               <ChevronDown className="w-4 h-4" />
             </button>
@@ -156,7 +157,7 @@ const Navbar = () => {
                 <Link
                   key={index}
                   href={`/${item.toLowerCase().replace(" ", "-")}`}
-                  className="block px-4 py-2 hover:text-orange-500 whitespace-nowrap"
+                  className="block px-4 py-2 hover:text-orange-orange500 whitespace-nowrap"
                 >
                   {item}
                 </Link>
@@ -169,47 +170,38 @@ const Navbar = () => {
 
         {/* Right Icons */}
         <div className="flex items-center space-x-2 sm:space-x-4">
-          <div className="hidden lg:flex items-center space-x-4">
-            <div className="relative flex items-center space-x-2">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-48 xl:w-64 px-4 py-2 border rounded-lg"
-              />
-              <button className="bg-black text-white p-2 rounded-lg">
-                <Search className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
+          <LargeDeviceSearch />
 
+          {/* mobile search button */}
           <button
-            className="lg:hidden hover:text-orange-500"
+            className="lg:hidden hover:text-orange-orange500"
             onClick={() => setIsSearchOpen(!isSearchOpen)}
           >
             <Search className="w-6 h-6" />
           </button>
+
           {user ? (
-            <Link href="/dashboard/profilesection" className="hover:text-orange-500">
-     <span className="flex items-center">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                  <span className="hidden lg:inline ml-1">User</span>
-                </span>
+            <Link href="/dashboard/profilesection" className="hover:text-orange-orange500">
+              <span className="flex items-center">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                <span className="hidden lg:inline ml-1">User</span>
+              </span>
             </Link>
           ) : (
             <>
-              <Link href="/signin" className="hover:text-orange-500">
+              <Link href="/signin" className="hover:text-orange-orange500">
                 <span className="flex items-center">
                   <svg
                     className="w-6 h-6"
@@ -231,7 +223,7 @@ const Navbar = () => {
           )}
           <Link
             href="/dashboard/wishlist"
-            className="relative hover:text-orange-500"
+            className="relative hover:text-orange-orange500"
           >
             <svg
               className="w-6 h-6"
@@ -250,7 +242,7 @@ const Navbar = () => {
               {wishlistCount}
             </span>
           </Link>
-          <Link href="/cart" className="relative hover:text-orange-500">
+          <Link href="/cart" className="relative hover:text-orange-orange500">
             <svg
               className="w-6 h-6"
               fill="none"
@@ -293,11 +285,10 @@ const Navbar = () => {
 
       {/* Mobile Search Bar */}
       <div
-        className={`lg:hidden absolute left-0 right-0 bg-white px-4 py-2 shadow-md transition-all duration-300 ease-in-out ${
-          isSearchOpen
+        className={`lg:hidden absolute left-0 right-0 bg-white px-4 py-2 shadow-md transition-all duration-300 ease-in-out ${isSearchOpen
             ? "translate-x-0 opacity-100"
             : "translate-x-full opacity-0 pointer-events-none"
-        }`}
+          }`}
       >
         <div className="flex items-center space-x-2">
           <input
@@ -315,7 +306,7 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 max-h-[80vh] overflow-y-auto">
           <div className="flex flex-col space-y-2 px-4">
-            <Link href="/" className="py-2 text-orange-500">
+            <Link href="/" className="py-2 text-orange-orange500">
               Home
             </Link>
 
@@ -327,9 +318,8 @@ const Navbar = () => {
               >
                 <span>Shop</span>
                 <ChevronDown
-                  className={`w-4 h-4 transform transition-transform ${
-                    activeDropdown === "shop" ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transform transition-transform ${activeDropdown === "shop" ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               {activeDropdown === "shop" && (
@@ -342,11 +332,10 @@ const Navbar = () => {
                       >
                         <span>{item.title}</span>
                         <ChevronDown
-                          className={`w-4 h-4 transform transition-transform ${
-                            activeDropdown === `shop-${index}`
+                          className={`w-4 h-4 transform transition-transform ${activeDropdown === `shop-${index}`
                               ? "rotate-180"
                               : ""
-                          }`}
+                            }`}
                         />
                       </button>
                       {activeDropdown === `shop-${index}` && (
@@ -380,9 +369,8 @@ const Navbar = () => {
               >
                 <span>Products</span>
                 <ChevronDown
-                  className={`w-4 h-4 transform transition-transform ${
-                    activeDropdown === "products" ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transform transition-transform ${activeDropdown === "products" ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               {activeDropdown === "products" && (
@@ -408,9 +396,8 @@ const Navbar = () => {
               >
                 <span>More</span>
                 <ChevronDown
-                  className={`w-4 h-4 transform transition-transform ${
-                    activeDropdown === "more" ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transform transition-transform ${activeDropdown === "more" ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               {activeDropdown === "more" && (

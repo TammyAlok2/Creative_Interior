@@ -235,7 +235,7 @@ const AddDeliveryAddress = ({ handleSelectPage }) => {
                 setFormData((prev) => ({ ...prev, isDefault: !!checked }))
               }
               disabled={isSubmitting}
-              className="text-white active:bg-medium_primary ml-[.2rem] rounded-[.3rem] w-[1.2rem] h-[1.2rem]"
+              className="text-white active:bg-orange-orange500 ml-[.2rem] rounded-[.3rem] w-[1.2rem] h-[1.2rem]"
             />
             <label>Make this my default address</label>
           </div>

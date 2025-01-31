@@ -65,7 +65,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
         </div>
         </div>
       </div>
-      <button className="bg-primary hover:opacity-[0.9] text-white py-2 px-4 rounded" onClick={handleAddToCart}>
+      <button className="bg-orange-orange500 hover:opacity-[0.9] text-white py-2 px-4 rounded" onClick={handleAddToCart}>
         Add to Cart
       </button>
     </div>

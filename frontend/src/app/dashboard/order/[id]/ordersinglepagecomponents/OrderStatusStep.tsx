@@ -20,14 +20,14 @@ export default function OrderStatusStep({
       {/* Line */}
       <div
         className={`hidden sm:block w-full h-0.5 ${
-          isActive ? "bg-green-500" : "bg-gray-300"
+          isActive ? "bg-orange-orange500" : "bg-gray-300"
         } absolute top-2 left-0`}
       ></div>
 
       {/* Vertical Line for Mobile */}
       <div
         className={`h-full max-[574px]:z-10 max-[574px]:ml-[.4rem] w-0.5 ${
-          isActive ? "bg-green-500" : "bg-gray-300"
+          isActive ? "bg-orange-orange500" : "bg-gray-300"
         } absolute top-0 left-2 -z-10`}
       ></div>
 
@@ -37,7 +37,7 @@ export default function OrderStatusStep({
         <div
           className={`h-4 w-4 rounded-full ${
             isActive
-              ? "bg-green-500 border-green-700"
+              ? "bg-orange-orange500 border-orange-orange600"
               : "bg-gray-300 border-gray-400"
           } border-2 z-10 shrink-0`}
         ></div>
@@ -47,7 +47,7 @@ export default function OrderStatusStep({
           {/* Status */}
           <p
             className={`font-semibold text-center text-sm mt-0 sm:mt-1 ${
-              isActive ? "text-green-600" : "text-gray-600"
+              isActive ? "text-orange-orange500" : "text-gray-600"
             }`}
           >
             {status}

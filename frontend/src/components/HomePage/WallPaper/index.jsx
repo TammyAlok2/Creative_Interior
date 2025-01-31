@@ -83,6 +83,7 @@ const WallpaperGrid = () => {
             <Link href={`/wallpaper/multiple/${wallpaper?._id}`} key={index}>
               <WallpaperCard
                 data={wallpaper}
+                isLoading={isLoading}
               />
             </Link>
           ))}

@@ -23,13 +23,13 @@ const BlogCard = ({ date, category, title, author, comments, excerpt,image }) =>
       
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
-        <div className="text-orange-500 font-medium mb-2 uppercase tracking-wider text-sm">
+        <div className="text-orange-orange500 font-medium mb-2 uppercase tracking-wider text-sm">
           {category}
         </div>
         
         <Link 
           href="#" 
-          className="text-xl font-semibold mb-3 hover:text-orange-500 transition-colors duration-300 line-clamp-2"
+          className="text-xl font-semibold mb-3 hover:text-orange-orange500 transition-colors duration-300 line-clamp-2"
         >
           {title}
         </Link>
@@ -46,7 +46,7 @@ const BlogCard = ({ date, category, title, author, comments, excerpt,image }) =>
         <div className='text-xs font-bold underline'>   
         <Link 
           href="#" 
-          className="inline-flex items-center justify-center text-black hover:text-orange-500 transition-colors duration-300 group"
+          className="inline-flex items-center justify-center text-black hover:text-orange-orange500 transition-colors duration-300 group"
           >
           READ MORE 
           <svg 

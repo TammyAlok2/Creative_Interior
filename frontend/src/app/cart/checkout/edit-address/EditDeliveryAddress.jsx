@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 import FormSection from "../add-address/add-address-components/FormSection";
 import FormField from "../add-address/add-address-components/FormField";
-import Checkbox from "../add-address/add-address-components/Checkbox";
 import Button from "../add-address/add-address-components/Button";
 import { AddressSectionProps } from "../checkout-components/AddressSection";
 import CancelButton from "../add-address/add-address-components/CancelButton";
 import { useAddressStore } from "@/stores/addressStore";
 import toast from "react-hot-toast";
+import { Checkbox } from "@/components/ui/checkbox";
 
 
 // interface FormData {
@@ -227,7 +227,6 @@ const EditDeliveryAddress = ({handleSelectPage, deliveryAddressId}) => {
               required
             />
           </div>
-
           <div className="flex items-center gap-2">
             <Checkbox
               checked={formData.isDefault}
@@ -235,6 +234,7 @@ const EditDeliveryAddress = ({handleSelectPage, deliveryAddressId}) => {
                 setFormData((prev) => ({ ...prev, isDefault: !!checked }))
               }
               disabled={isSubmitting}
+              className="text-white active:bg-orange-orange500 ml-[.2rem] rounded-[.3rem] w-[1.2rem] h-[1.2rem]"
             />
             <label>Make this my default address</label>
           </div>

@@ -3,7 +3,7 @@ import React from 'react';
 
 const CancelButton = ({ handleSelectPage }) => {
   const baseStyle = 'px-6 py-2 max-[524px]:px-3 rounded-lg font-medium';
-  const variantStyle ='bg-white text-medium_primary border border-medium_primary hover:bg-black hover:opacity-[0.9] hover:text-white hover:border-black font-semibold';
+  const variantStyle ='bg-white text-orange-orange500 border border-orange-orange500 hover:bg-black hover:opacity-[0.9] hover:text-white hover:border-black font-semibold';
 
   return (
     <button onClick={()=>handleSelectPage("address-section")} className={`${baseStyle} ${variantStyle}`}>

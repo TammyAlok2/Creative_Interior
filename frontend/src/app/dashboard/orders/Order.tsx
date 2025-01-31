@@ -26,10 +26,10 @@ export default function Order() {
           </Link>
           <h1 className="text-[1rem] font-bold text-gray-dark">{">"}</h1>
           <Link href={"/dashboard/profilesection"}>
-          <p className="text-[1rem] text-primary font-semibold opacity-[0.6] hover:opacity-[.8] cursor-pointer">Dashboard</p>
+          <p className="text-[1rem] text-orange-orange500 font-semibold opacity-[0.6] hover:opacity-[.8] cursor-pointer">Dashboard</p>
           </Link>
           <h1 className="text-[1rem] font-bold text-gray-dark">{">"}</h1>
-          <p className="text-[1rem] text-primary font-semibold opacity-[0.6] hover:opacity-[.8] cursor-pointer">My Orders</p>
+          <p className="text-[1rem] text-orange-orange500 font-semibold opacity-[0.6] hover:opacity-[.8] cursor-pointer">My Orders</p>
 
         </div>
         {/* Filter Text */}

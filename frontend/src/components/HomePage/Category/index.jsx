@@ -67,7 +67,7 @@ const ProductCategories = () => {
           </div>
 
           {/* Categories Link */}
-          <button className="text-gray-900 font-medium border-b-2 border-orange-500 pb-1 inline-flex items-center hover:text-orange-500 transition-colors group">
+          <button className="text-gray-900 font-medium border-b-2 border-orange-orange500 pb-1 inline-flex items-center hover:text-orange-orange500 transition-colors group">
             ALL CATEGORIES
             <ChevronRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
           </button>
@@ -106,7 +106,7 @@ const ProductCategories = () => {
                   </div>
                   {/* Card Content */}
                   <div className="p-6 h-24 flex items-center justify-center">
-                    <h3 className="text-lg font-semibold text-gray-600 group-hover/card:text-orange-500 transition-colors text-center">
+                    <h3 className="text-lg font-semibold text-gray-600 group-hover/card:text-orange-orange500 transition-colors text-center">
                       {product.title}
                     </h3>
                   </div>
@@ -116,10 +116,10 @@ const ProductCategories = () => {
 
             {/* Custom Navigation Buttons */}
        {/* Custom Navigation Buttons */}
-<button className="swiper-button-prev opacity-0 group-hover:opacity-100 transition-all duration-300 absolute top-1/2 -left-2 transform -translate-y-1/2 z-10 w-6 h-6 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center shadow-md hover:scale-105">
+<button className="swiper-button-prev opacity-0 group-hover:opacity-100 transition-all duration-300 absolute top-1/2 -left-2 transform -translate-y-1/2 z-10 w-6 h-6 bg-orange-orange500 hover:opacity-[0.9] rounded-full flex items-center justify-center shadow-md hover:scale-105">
   <ChevronLeft className="w-3 h-3 text-white" />
 </button>
-<button className="swiper-button-next opacity-0 group-hover:opacity-100 transition-all duration-300 absolute top-1/2 -right-2 transform -translate-y-1/2 z-10 w-6 h-6 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center shadow-md hover:scale-105">
+<button className="swiper-button-next opacity-0 group-hover:opacity-100 transition-all duration-300 absolute top-1/2 -right-2 transform -translate-y-1/2 z-10 w-6 h-6 bg-orange-orange500 hover:opacity-[0.9] rounded-full flex items-center justify-center shadow-md hover:scale-105">
   <ChevronRight className="w-3 h-3 text-white" />
 </button>
 

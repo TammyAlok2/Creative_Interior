@@ -20,7 +20,7 @@ const Newsletter = () => {
           <div className="flex items-center space-x-4">
             <motion.div 
               whileHover={{ rotate: 10 }}
-              className="text-orange-500"
+              className="text-orange-orange500"
             >
               <svg 
                 className="w-12 h-12"

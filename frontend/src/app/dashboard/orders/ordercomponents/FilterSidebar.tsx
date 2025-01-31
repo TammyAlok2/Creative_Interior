@@ -66,7 +66,7 @@ export default function FilterSidebar({ isOpen, toggleSidebar }: FilterSidebarPr
                 <Checkbox 
                   checked={selectedStatus.includes(status)}
                   onCheckedChange={() => handleStatusChange(status)}
-                  className="mr-2 w-[1.2rem] h-[1.2rem] rounded-[0.3rem] text-white data-[state=checked]:bg-medium_primary border-gray-thin" 
+                  className="mr-2 w-[1.2rem] h-[1.2rem] rounded-[0.3rem] text-white data-[state=checked]:bg-orange-orange500 border-gray-thin" 
                 />
                 <label className="font-thin text-[0.90rem]">{status}</label>
               </li>

@@ -35,7 +35,7 @@ const DeleteAddress = async (id: string)=>{
 }
 
   return (
-    <div className={`border ${isSelected && 'border-medium_primary'} rounded-xl box-shadow ${isSelected && `bg-thin_primary`} p-4 relative flex gap-4`}>
+    <div className={`border ${isSelected && 'border-orange-orange500'} rounded-xl box-shadow ${isSelected && `bg-orange-orange100`} p-4 relative flex gap-4`}>
       <CustomRadioButton 
         selected={isSelected} 
         onChange={() => onSelect(id)}
@@ -48,7 +48,7 @@ const DeleteAddress = async (id: string)=>{
         </div>
         <div>
           <div className="flex flex-col justify-between h-full">
-            <button className="border border-gray-mediumLight hover:border-dim_primary rounded px-3 py-1 text-sm text-gray-medium hover:bg-dim_primary font-semibold" onClick={()=> handleSelectPage("edit-address", id)}>
+            <button className="border border-gray-mediumLight hover:border-orange-orange500 rounded px-3 py-1 text-sm text-gray-medium hover:bg-orange-orange500 hover:text-white font-semibold" onClick={()=> handleSelectPage("edit-address", id)}>
               Edit
             </button>
             <button onClick={()=>{DeleteAddress(id)}} className="border border-gray-mediumLight rounded px-3 py-1 text-sm text-gray-medium hover:bg-red hover:border-red hover:text-white font-semibold">

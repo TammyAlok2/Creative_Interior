@@ -151,7 +151,7 @@ const HeroSection = () => {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors ${
-                index === currentSlide ? 'bg-orange-500' : 'bg-gray-300'
+                index === currentSlide ? 'bg-orange-orange500' : 'bg-gray-300'
               }`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}

@@ -95,7 +95,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ allOrders, handleBreakupVis
 
             {/* Button to toggle visibility of the breakup */}
             <div className="flex items-end justify-between">
-              <button onClick={handleBreakupVisible(true)} className="font-bold flex items-end justify-end border p-2 rounded-xl opacity-[.8] hover:bg-low_primary">View Receipt</button>
+              <button onClick={handleBreakupVisible(true)} className="font-bold flex items-end justify-end border p-2 rounded-xl opacity-[.8] hover:bg-orange-orange100">View Receipt</button>
               {/* <button className="font-bold flex items-end justify-end border p-2 rounded-xl opacity-[.8] hover:bg-red hover:text-white"
               //  onClick={handleDownload}
                >Download Receipt</button> */}

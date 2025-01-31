@@ -211,17 +211,17 @@ export default function OrderDetails() {
             </div>
             <div className="flex justify-between">
               <span>Shipping Charges</span>
-              <span className="text-medium_primary">Free</span>
+              <span className="text-orange-orange500">Free</span>
             </div>
             {discount > 0 && (
               <div className="flex justify-between">
                 <span>Discount</span>
-                <span className="text-medium_primary">-₹ {discount}</span>
+                <span className="text-orange-orange500">-₹ {discount}</span>
               </div>
             )}
 
             {appliedCoupon && (
-              <div className="flex justify-between text-green-600">
+              <div className="flex justify-between text-orange-orange500">
                 <span>Coupon Discount ({appliedCoupon.code})</span>
                 <span>-₹ {appliedCoupon.discount}</span>
               </div>
@@ -248,7 +248,7 @@ export default function OrderDetails() {
             />
             {!isUpdateTextVisible ? (
               <button
-                className="font-semibold opacity-[0.8] text-medium_primary"
+                className="font-semibold opacity-[0.8] text-orange-orange500"
                 onClick={toggleCouponSidebar}
               >
                 SELECT
@@ -262,8 +262,8 @@ export default function OrderDetails() {
               </button>
             )}
           </div>
-          <div className="flex gap-3 items-center justify-center bg-low_primary p-2">
-            <RiDiscountPercentFill className="text-medium_primary text-[1.4rem]" />
+          <div className="flex gap-3 items-center justify-center bg-orange-orange100 p-2">
+            <RiDiscountPercentFill className="text-orange-orange500 text-[1.4rem]" />
             <span className="border-b-[0.1rem] border-gray-dark text-[0.8rem] cursor-pointer">
               You have 0 coupon
             </span>
@@ -314,7 +314,7 @@ export default function OrderDetails() {
               !canProceedWithOrder() || isProcessing
                 ? "opacity-50 cursor-not-allowed"
                 : "opacity-80 hover:opacity-90"
-            } bg-medium_primary text-white py-2 rounded-lg text-lg flex justify-center items-center`}
+            } bg-orange-orange500 text-white py-2 rounded-lg text-lg flex justify-center items-center`}
           >
             {isProcessing ? (
               <span className="inline-block animate-spin rounded-full h-6 w-6 border-t-2 border-white" />

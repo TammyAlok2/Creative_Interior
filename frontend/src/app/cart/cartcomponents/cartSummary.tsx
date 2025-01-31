@@ -59,7 +59,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({
         </div>
         <div className="mt-4 text-center">
           {total > 0 && (
-            <AiFillSafetyCertificate className="text-green-500 text-3xl mx-auto mb-2" />
+            <AiFillSafetyCertificate className="text-orange-orange500 text-3xl mx-auto mb-2" />
           )}
           <Link 
             href={total > 0 ? "/cart/checkout/?page=address-section" : "#"}
@@ -67,8 +67,8 @@ const CartSummary: React.FC<CartSummaryProps> = ({
             className={`inline-block w-full ${total <= 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <button 
-              className={`bg-green-500 text-white py-2 px-4 rounded-full w-full
-                ${total > 0 ? 'hover:bg-green-600' : 'opacity-50 cursor-not-allowed'}
+              className={`bg-orange-orange500 hover:opacity-[0.9] text-white py-2 px-4 rounded-full w-full
+                ${total > 0 ? 'hover:opacity-[.9]' : 'opacity-50 cursor-not-allowed'}
                 transition-colors`}
               disabled={total <= 0}
             >

@@ -52,7 +52,7 @@ module.exports = {
 					orange100: "#FFEDD5",
 					orange200: "#FED7AA",
 					orange300: "#FDBA74",
-					orange500: "#F97316",
+					orange500: "#9f1127",
 					orange600: "#EA580C"
 				},
 				current: "currentColor",

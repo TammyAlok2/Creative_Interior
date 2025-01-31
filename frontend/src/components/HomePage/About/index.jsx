@@ -29,7 +29,7 @@ const AboutSection = () => {
             </p>
             
             <div>
-              <button className="inline-flex items-center gap-2 bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-600 transition-colors">
+              <button className="inline-flex items-center gap-2 bg-orange-orange500 text-white px-6 py-3 rounded-md hover:opacity-[0.9] transition-colors">
                 <UserCircle className="w-5 h-5" />
                 ABOUT US
               </button>

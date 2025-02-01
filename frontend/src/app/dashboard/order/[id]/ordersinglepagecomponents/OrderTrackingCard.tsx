@@ -20,6 +20,13 @@ export default function OrderTrackingCard({ orderDetails }: any) {
     (status) => status.status === orderDetails?.orderStatus
   );
 
+  const lastActiveIndex = orderStatuses.reduce((lastIndex, _, index) => {
+    if (index <= currentStatusIndex) {
+      return index;
+    }
+    return lastIndex;
+  }, -1);
+
   return (
     <div className="rounded-lg lg:w-[45rem] 2xl:w-[52rem] max-[1001px]:w-full bg-white box-shadow p-[1rem] hover:scale-[1.02] transition-all duration-300 ease-in-out border">
       <div className="flex flex-col gap-4 items-start justify-between bg-white rounded-lg max-[976px]:flex-col">
@@ -63,6 +70,7 @@ export default function OrderTrackingCard({ orderDetails }: any) {
               date={status.date}
               color={index < currentStatusIndex ? "green" : "gray"}
               isCurrent={index === currentStatusIndex}
+              isLastActive={index === lastActiveIndex}
             />
           ))}
         </div>

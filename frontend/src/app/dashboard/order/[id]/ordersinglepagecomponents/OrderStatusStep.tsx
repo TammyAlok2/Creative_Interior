@@ -12,6 +12,7 @@ export default function OrderStatusStep({
   date,
   color = "gray",
   isCurrent = false,
+  isLastActive = false,
 }: OrderStatusStepProps) {
   const isActive = color === "green" || isCurrent;
 
@@ -34,13 +35,18 @@ export default function OrderStatusStep({
       {/* Content Container */}
       <div className="flex sm:flex-col items-start sm:items-center w-full">
         {/* Dot */}
-        <div
-          className={`h-4 w-4 rounded-full ${
-            isActive
-              ? "bg-orange-orange500 border-orange-orange600"
-              : "bg-gray-300 border-gray-400"
-          } border-2 z-10 shrink-0`}
-        ></div>
+        <div className="relative">
+          {isActive && isLastActive && (
+            <div className="absolute inline-flex h-full w-full rounded-full opacity-75 bg-orange-orange500 animate-ping" />
+          )}
+          <div
+            className={`h-4 w-4 rounded-full ${
+              isActive
+                ? "bg-orange-orange500"
+                : "bg-gray-300 border-gray-400"
+            } border-2 z-10 shrink-0 relative`}
+          ></div>
+        </div>
 
         {/* Text Container */}
         <div className="flex flex-col sm:items-center ml-4 sm:ml-0">

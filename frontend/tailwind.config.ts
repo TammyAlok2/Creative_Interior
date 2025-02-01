@@ -49,8 +49,8 @@ module.exports = {
 				accent: 'var(--accent)',
 				orange: {
 					orange50: "#FFF7ED",
-					orange100: "#FFEDD5",
-					orange200: "#FED7AA",
+					orange100: "#fee2e2",
+					orange200: "#fecaca",
 					orange300: "#FDBA74",
 					orange500: "#9f1127",
 					orange600: "#EA580C"

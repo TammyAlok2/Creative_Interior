@@ -132,7 +132,7 @@ const LargeDeviceSearch = () => {
                 key={suggestion.id}
                 onClick={() => handleSuggestionClick(suggestion)}
                 className={`w-full px-4 py-2 text-left focus:outline-none ${
-                    highlightIndex === index ? 'bg-gray-100' : 'hover:bg-gray-100'
+                    highlightIndex === index ? 'bg-gray-100 border-l-[.4rem] border-l-orange-orange200' : 'hover:bg-gray-100'
                 }`}
             >
                 {suggestion.name}

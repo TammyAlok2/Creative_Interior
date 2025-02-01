@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import CartItem from './cartcomponents/CartItem';
 import CartSummary from './cartcomponents/cartSummary';
 import { useCartStore, useCartSync } from '@/stores/cartStore';
+import Image from 'next/image';
 
 const CartPage: React.FC = () => {
   const [salesTax] = useState<number>(0);
@@ -71,7 +72,8 @@ const CartPage: React.FC = () => {
           
           {validItems.length === 0 && (
             <div className="text-center py-8 text-gray-500">
-              Your cart is empty
+              <Image width={400} height={400} src={"/images/cart/empty-cart.gif"} alt='Empty cart...' className='w-[20rem] mx-auto' />
+              <h1 className='font-bold text-2xl'>Your Cart is Empty!</h1>
             </div>
           )}
         </div>

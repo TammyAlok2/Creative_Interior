@@ -2,7 +2,7 @@ import { useCartStore } from "@/stores/cartStore";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { IoIosRemoveCircle } from "react-icons/io";
+import { MdOutlinePlaylistRemove } from "react-icons/md";
 
 interface ProductItemProps {
   product: any;
@@ -41,8 +41,8 @@ const ProductItem: React.FC<ProductItemProps> = ({
   return (
     <div className="flex items-center justify-between border-b py-4 max-[534px]:flex-col max-[534px]:items-start sm:flex-row max-[534px]:gap-[1rem]">
       <div className="flex items-center max-[1562px]:w-[80%] max-[1146px]:w-[70%] space-x-4 max-[534px]:flex-row-reverse max-[534px]:space-x-0 max-[534px]:justify-between max-[534px]:w-full w-[88%]">
-        <button className="text-gray-dark text-[1.9rem] hover:text-red" onClick={onDelete}>
-          <IoIosRemoveCircle />
+        <button className="text-gray-dark hover:bg-gray-100 p-[.2rem] rounded-full hover:border text-[1.9rem] hover:text-red" onClick={onDelete}>
+          <MdOutlinePlaylistRemove />
         </button>
         <div className="flex items-center space-x-4">
         <Image

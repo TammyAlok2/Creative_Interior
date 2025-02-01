@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ProductItem from "./wishlistcomponents/ProductItem";
 import { useWishlistStore } from "@/stores/wishlistStore";
+import Image from "next/image";
 
 // Define the title prop interface
 interface WishlistTitleProps {
@@ -76,7 +77,8 @@ const Wishlist: React.FC<WishlistTitleProps> = ({ wishlistTitle }) => {
         {isLoading ? (
           <Loader />
         ) : wishlist?.products?.length === 0 ? (
-          <p>Your wishlist is empty!</p>
+          // <p>Your wishlist is empty!</p>
+          <Image width={400} height={400} src="/images/wishlist/no-wish-list.png" alt="Empty wishlist..." className="w-[20rem] mx-auto my-10 opacity-[.8]" />
         ) : (
           wishlist?.products?.map((item: WishlistItem) => (
             <ProductItem

@@ -43,7 +43,6 @@ const Home = () => {
         <Features />
         {/* <WallpaperDesign/> */}
         <BlogSection />
-     
       </main>
     </>
   )

@@ -35,17 +35,17 @@ const WallpaperInfoTabs = () => {
   const GuidesContent = () => (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
       {guides.map((guide, index) => (
-        <div key={index} className="flex flex-col items-center text-center p-8 m-8 border border-gray-200 rounded-lg shadow-sm">
+        <div key={index} className="flex flex-col items-center text-center p-8 m-8 border border-l-[.5rem] border-gray-200 rounded-xl hover:border-l-orange-orange500 shadow-sm transition-all duration-500 ease-in-out">
           <h2 className="text-red-800 font-bold text-xl mb-6">{guide.title}</h2>
           <div className="w-24 h-24 mb-6">
-            <img 
-              src={guide.image} 
-              alt={guide.title} 
+            <img
+              src={guide.image}
+              alt={guide.title}
               className="w-full h-full object-contain"
             />
           </div>
           <p className="mb-8 text-gray-700">{guide.description}</p>
-          <button className="border border-red-800 text-red-800 px-6 py-2 hover:bg-red-800 hover:text-white transition-colors rounded">
+          <button className="border border-red-800 text-red-800 px-6 py-2 hover:bg-gray-100 hover:font-bold hover:text-gray-700 transition-all rounded duration-500 ease-in-out">
             {guide.buttonText}
           </button>
         </div>
@@ -56,16 +56,35 @@ const WallpaperInfoTabs = () => {
     <div className="p-6 m-[5em]">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold mb-4">Krishna Pichwai Wallpaper: Magical Design Combined with Divine Artistry</h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div>
-            <p className="text-sm mb-2">Price: Rs. 99/sq.ft.</p>
-            <p className="text-sm mb-2">Shipping: Free</p>
-          </div>
-          <div>
-            <p className="text-sm mb-2">Country of Origin: India</p>
-            <p className="text-sm mb-2">Brand / Manufacturer: Magic Decor™</p>
-          </div>
+
+          <table className="w-full border-collapse text-sm tracking-[.7] border border-gray-200">
+            <tbody>
+              <tr>
+                <td className="border border-gray-200 p-1 bg-gray-50 font-medium">Price</td>
+                <td className="border border-gray-200 p-1">Rs. 99/sq.ft.</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-200 p-1 bg-gray-50 font-medium">Shipping</td>
+                <td className="border border-gray-200 p-1">Free</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table className="w-full border-collapse text-sm tracking-[.7] border border-gray-200">
+            <tbody>
+              <tr>
+                <td className="border border-gray-200 p-1 bg-gray-50 font-medium">Country of Origin</td>
+                <td className="border border-gray-200 p-1">India</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-200 p-1 bg-gray-50 font-medium">Brand / Manufacturer</td>
+                <td className="border border-gray-200 p-1">Creative Interior</td>
+              </tr>
+            </tbody>
+          </table>
+
         </div>
 
         <div className="space-y-6">
@@ -104,33 +123,33 @@ const WallpaperInfoTabs = () => {
 
   const sustainability = [
     {
-        title:"Nordic Ecolabel Ecolabeled wallpaper",
-        image:"/images/SingleProduct/Sustainability/Nordic.png",
+      title: "Nordic Ecolabel Ecolabeled wallpaper",
+      image: "/images/SingleProduct/Sustainability/Nordic.png",
     },
     {
-        title:"Odurless Water Based Inks",
-        image:"/images/SingleProduct/Sustainability/Odurless.png",
+      title: "Odurless Water Based Inks",
+      image: "/images/SingleProduct/Sustainability/Odurless.png",
     },
     {
-        title:"Nordic Ecolabel Ecolabeled wallpaper",
-        image:"/images/SingleProduct/Sustainability/Smart.png",
+      title: "Nordic Ecolabel Ecolabeled wallpaper",
+      image: "/images/SingleProduct/Sustainability/Smart.png",
     },
     {
-        title:"Nordic Ecolabel Ecolabeled wallpaper",
-        image:"/images/SingleProduct/Sustainability/Greenguard.png",
+      title: "Nordic Ecolabel Ecolabeled wallpaper",
+      image: "/images/SingleProduct/Sustainability/Greenguard.png",
     }
   ]
 
   const SustainabilityContent = () => (
     <div className="p-6 m-[5em]">
-       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {sustainability.map((item, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="flex flex-col items-center justify-center text-center"
           >
             <div className="relative w-32 h-32 mb-6">
-           
+
               <img
                 src={item.image}
                 alt={item.title}
@@ -163,16 +182,15 @@ const WallpaperInfoTabs = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto m-[2em] ">
-      <div className="grid grid-cols-1 md:grid-cols-4 m-[2em] ">
+      <div className="grid grid-cols-1 md:grid-cols-4 border m-[2em] ">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`p-4 text-center transition-colors ${
-              activeTab === tab.id
-                ? 'bg-red-800 text-white'
-                : 'bg-red-50 text-gray-700 hover:bg-gray-100'
-            }`}
+            className={`p-4 text-center transition-colors ${activeTab === tab.id
+              ? 'bg-gray-100  text-gray-700 font-bold'
+              : 'bg-red-50 text-gray-700 border-x hover:bg-gray-100'
+              }`}
           >
             {tab.label}
           </button>

@@ -13,6 +13,7 @@ const LargeDeviceSearch = () => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [noResults, setNoResults] = useState(false);
+    const [highlightIndex, setHighlightIndex] = useState(-1); // Track highlighted index
     const { allProduct } = useProductDataStore();
     const searchRef = useRef(null);
 
@@ -20,6 +21,7 @@ const LargeDeviceSearch = () => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
                 setShowSuggestions(false);
+                setHighlightIndex(-1);
             }
         };
 
@@ -63,13 +65,12 @@ const LargeDeviceSearch = () => {
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        
         if (!search.trim()) return;
-        
+
         try {
             const response = await allProduct({ search });
             const products = response?.products || [];
-            
+
             if (products.length > 0) {
                 router.push(`/wallpaper/multiple/${products[0]._id}`);
             } else {
@@ -86,6 +87,21 @@ const LargeDeviceSearch = () => {
         setSearch(suggestion.name);
         setShowSuggestions(false);
         router.push(`/wallpaper/multiple/${suggestion.id}`);
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'ArrowDown') {
+            setHighlightIndex((prevIndex) =>
+                prevIndex < suggestions.length - 1 ? prevIndex + 1 : 0
+            );
+        } else if (e.key === 'ArrowUp') {
+            setHighlightIndex((prevIndex) =>
+                prevIndex > 0 ? prevIndex - 1 : suggestions.length - 1
+            );
+        } else if (e.key === 'Enter' && highlightIndex >= 0) {
+            e.preventDefault();
+            handleSuggestionClick(suggestions[highlightIndex]);
+        }
     };
 
     const LoadingSpinner = () => (
@@ -111,11 +127,13 @@ const LargeDeviceSearch = () => {
             );
         }
 
-        return suggestions.map((suggestion) => (
+        return suggestions.map((suggestion, index) => (
             <button
                 key={suggestion.id}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:outline-none"
+                className={`w-full px-4 py-2 text-left focus:outline-none ${
+                    highlightIndex === index ? 'bg-gray-100' : 'hover:bg-gray-100'
+                }`}
             >
                 {suggestion.name}
             </button>
@@ -132,8 +150,10 @@ const LargeDeviceSearch = () => {
                     onChange={(e) => {
                         setSearch(e.target.value);
                         setShowSuggestions(true);
+                        setHighlightIndex(-1); // Reset highlight when typing
                     }}
                     onFocus={() => setShowSuggestions(true)}
+                    onKeyDown={handleKeyDown} // Listen for arrow key navigation
                     className="w-48 xl:w-64 px-4 py-2 border rounded-lg"
                 />
                 <button 

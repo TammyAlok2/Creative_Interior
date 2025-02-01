@@ -14,7 +14,7 @@ const WishlistContainer: React.FC = () => {
   return (
     <DashboardLayout>
     <div className="pb-[1rem]">
-    <div className='mb-[4rem] box-shadow rounded-xl p-2 border overflow-hidden flex gap-[2rem] min-[280px]:flex-col lg:flex-row max-lg:w-[100%]'>
+    <div className='mb-[4rem] box-shadow border-b-[.7rem] border-b-gray-200 rounded-xl p-2 border overflow-hidden flex gap-[2rem] min-[280px]:flex-col lg:flex-row max-lg:w-[100%]'>
       {/* <Dashboard /> */}
       <Wishlist wishlistTitle={wishlistTitle} />
     </div>

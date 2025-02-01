@@ -44,7 +44,7 @@ const WhyChooseSection = () => {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="bg-red-50 rounded-lg p-6 flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-300 shadow-sm hover:shadow-md"
+            className="bg-red-50 rounded-xl p-6 flex flex-col items-center text-center border border-b-[.5rem] border-gray-200 transform hover:scale-105 transition-all duration-300 ease-in-out shadow-sm hover:shadow-md hover:border-b-orange-orange500"
           >
             <div className="w-16 h-16 mb-4">
               <img

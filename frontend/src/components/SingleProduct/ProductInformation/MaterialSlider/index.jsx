@@ -1,46 +1,21 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useProductDataStore } from "@/stores/productStore";
+import { useMaterialStore } from "@/stores/materialStore";
 
 const MaterialSlider = () => {
   const [selectedMaterial, setSelectedMaterial] = useState("Quick Fix Paste");
   const sliderRef = useRef(null);
 
-  const productData = {
-    materials: [
-      {
-        id:1,
-        image: "/images/SingleProduct/WallPaper/Material/material1.png",
-        label: "Quick Fix Paste",
-        price: 990.0,
-        ribbon: "200",
-        isNew: true
-      },
-    
-      {
-        id:3,
-        image: "/images/SingleProduct/WallPaper/Material/material3.png",
-        label: "Peel & Stick",
-        price: 990.0,
-        ribbon: "41"
-      },
-      {
-        id:4,
-        image: "/images/SingleProduct/WallPaper/Material/material4.png",
-        label: "Premium Canvas",
-        price: 990.0,
-        ribbon: "70"
-      },
-      {
-        id:5,
-        image: "/images/SingleProduct/WallPaper/Material/material5.png",
-        label: "Peel & Stick",
-        price: 990.0,
-        ribbon: "42"
-      },
-     
-    ]
-  };
+  const { product } = useProductDataStore();
+  const { materials, getAllMaterials } = useMaterialStore();
+  console.log("materials: ", materials)
+
+  useEffect(() => {
+    getAllMaterials();
+  }, []);
+
 
   const scroll = (direction) => {
     if (sliderRef.current) {
@@ -72,50 +47,39 @@ const MaterialSlider = () => {
         </div>
       </div>
 
-      <div 
+      <div
         ref={sliderRef}
         className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {productData.materials.map((material, idx) => (
+        {materials.map((material, idx) => (
           <div
-            key={idx}
-            className="min-w-[120px] snap-start"
+            key={material._id}
+            className="w-[8rem] snap-start"
           >
             <button
-              onClick={() => setSelectedMaterial(material.id)}
-              className={`relative w-full border rounded-lg overflow-hidden ${
-                selectedMaterial === material.id
-                  ? "border-red-500 ring-2 ring-red-500"
-                  : "border-gray-200"
-              }`}
+              onClick={() => setSelectedMaterial(material._id)}
+              className={`relative w-full border rounded-lg overflow-hidden ${selectedMaterial === material._id
+                ? "border-red-500 ring-2 ring-red-500"
+                : "border-gray-200"
+                }`}
             >
-              {/* New Label */}
-              {material.isNew && (
-                <div className="absolute top-0  left-0 bg-gray-600 text-white px-4 py-1 -rotate-45 -translate-x-6 translate-y-2">
-                  NEW
-                </div>
-              )}
-              
-              {/* Price Ribbon */}
-              {material.ribbon !== "0" && (
-                <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 text-sm rounded">
-                  +₹{material.ribbon}
-                </div>
-              )}
-              
-              {/* Material Image */}
-              <div className="aspect-square w-full bg-gray-50">
+              <div className="absolute top-0 left-0 bg-gray-600 text-white px-4 py-1 -rotate-45 -translate-x-6 translate-y-2">
+                NEW
+              </div>
+
+              <div className="absolute top-2 right-2 bg-red-600 shadow-sm px-2 py-1 text-xs border font-bold rounded bg-white">
+                +₹{material.price}
+              </div>
+              <div className="aspect-square w-full border-b rounded-b-md overflow-hidden bg-gray-50">
                 <img
                   src={material.image}
-                  alt={material.label}
-                  className="w-full h-full object-cover"
+                  alt={material.name}
+                  className="w-full h-full object-cover hover:scale-105 transition-all duration-500 ease-in-out"
                 />
               </div>
-              
-              {/* Material Label */}
               <div className="p-2 text-center">
-                <div className="text-sm font-medium">{material.label}</div>
+                <div className="text-sm font-bold leading-4 tracking-[.01rem] truncate">{material.name}</div>
               </div>
             </button>
           </div>

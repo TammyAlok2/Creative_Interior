@@ -8,7 +8,7 @@ import { useProductDataStore } from "@/stores/productStore";
 const SimilarProducts = () => {
 
   const {product} = useProductDataStore();
-  console.log(product)
+  // console.log(product)
   return (
     <section className="py-8 px-4 bg-white">
       {/* Heading */}

@@ -6,7 +6,6 @@ import MaterialSlider from "./MaterialSlider";
 import ProductGallery from "./ProductGalleryImage";
 import { useParams } from "next/navigation";
 import { useProductDataStore } from "../../../stores/productStore"
-import { useMaterialStore } from "../../../stores/materialStore"
 import { Heart, Share2, ShoppingCart, Star, StarHalf } from "lucide-react";
 import { useCartStore } from "../../../stores/cartStore"
 import { useWishlistStore } from "../../../stores/wishlistStore"
@@ -31,14 +30,12 @@ const ProductDetail = () => {
 
   // Find the product from productCategories when component mounts
   useEffect(() => {
-    if (id) {
       // Assuming productCategories is an array of products
       const foundProduct = product.find(
         product => product._id === id || product.id === id
       );
       setProducts(foundProduct);
-    }
-  }, [id]);
+  }, [id, product]);
   // console.log("products hai:", products)
 
   // Add loading state
@@ -111,14 +108,12 @@ const ProductDetail = () => {
     }
   };
 
-  const { materials } = useMaterialStore();
-  console.log("materials: ", materials)
   
   return (
     <div className="max-w-7xl mx-auto p-4 bg-red-50 mt-[5rem]">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Section - Image Gallery */}
-        <ProductGallery product={products} />
+        <ProductGallery products={products} />
 
         {/* Right Section - Product Details */}
         <div className="space-y-6">
@@ -154,6 +149,7 @@ const ProductDetail = () => {
 
           {/* Material Selection */}
           <MaterialSlider />
+
           {/* Wall Size */}
           <div className="space-y-4 bg-white p-4 rounded-lg">
             <h2 className="text-lg font-semibold">Wall Size</h2>

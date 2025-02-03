@@ -53,7 +53,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           className="h-24 w-24 object-cover rounded-lg"
         />
         <div>
-        <Link href={`/singleproduct/${_id}`}><h3 className="font-semibold">{name||''}</h3></Link>
+        <Link href={`/wallpaper/multiple/${_id}`}><h3 className="font-semibold">{name||''}</h3></Link>
           <p className="max-[1606px]:hidden">{description.slice(0,180)}...</p>
           <p className="max-[1607px]:block min-[1607px]:hidden max-[1267px]:hidden">{description.slice(0,100)}...</p>
           <p className="max-[1268px]:block min-[1268px]:hidden max-[1145px]:hidden">{description.slice(0,70)}...</p>

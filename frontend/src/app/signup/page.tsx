@@ -69,7 +69,7 @@ const SignupPage = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Enter your full name"
-                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-orange-orange500 dark:border-transparent dark:bg-[#2C303B] dark:focus:border-orange-orange500 dark:focus:shadow-none"
                     required
                     />
                   </div>
@@ -87,7 +87,7 @@ const SignupPage = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your Email"
-                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-orange-orange500 dark:border-transparent dark:bg-[#2C303B] dark:focus:border-orange-orange500 dark:focus:shadow-none"
                    required
                    />
                   </div>
@@ -105,7 +105,7 @@ const SignupPage = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your Password"
-                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-orange-orange500 dark:border-transparent dark:bg-[#2C303B] dark:focus:border-orange-orange500 dark:focus:shadow-none"
                     required
                     />
                     <button
@@ -148,12 +148,12 @@ const SignupPage = () => {
                       </div>
                       <span>
                         By creating account means you agree to the
-                        <a href="#0" className="text-primary hover:underline">
+                        <a href="#0" className="text-orange-orange500 hover:underline">
                           {" "}
                           Terms and Conditions{" "}
                         </a>
                         , and our
-                        <a href="#0" className="text-primary hover:underline">
+                        <a href="#0" className="text-orange-orange500 hover:underline">
                           {" "}
                           Privacy Policy{" "}
                         </a>
@@ -164,10 +164,10 @@ const SignupPage = () => {
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className={`shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 ${
+                      className={`shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-orange-orange500 px-9 py-4 text-base font-medium text-white duration-300 ${
                         isLoading 
                           ? 'cursor-not-allowed opacity-70' 
-                          : 'hover:bg-primary/90'
+                          : 'hover:opacity-[.9]'
                       }`}
                     >
                       {isLoading ? 'Processing...' : 'Sign Up'}
@@ -185,7 +185,7 @@ const SignupPage = () => {
                 <SignInButton />
                 <p className="text-center text-base font-medium text-body-color">
                   Already User ?{" "}
-                  <Link href="/signin" className="text-primary hover:underline">
+                  <Link href="/signin" className="text-orange-orange500 hover:underline">
                     Sign in
                   </Link>
                 </p>

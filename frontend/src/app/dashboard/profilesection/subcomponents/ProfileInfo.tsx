@@ -104,7 +104,7 @@ const ProfileInfo = () => {
 
                     <button
                         onClick={isEditing ? handleSave : handleEditToggle}
-                        className={`${isEditing ? 'bg-medium_primary': 'bg-primary'} text-white px-[2rem] py-2 rounded mt-4`}
+                        className={`${isEditing ? 'bg-orange-orange400 hover:bg-orange-orange500': 'bg-orange-orange500 hover:opacity-[.9]'} text-white px-[2rem] py-2 rounded mt-4 transition-all duration-500 ease-in-out`}
                     >
                         {isEditing ? 'Save Changes' : 'Edit Profile'}
                     </button>

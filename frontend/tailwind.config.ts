@@ -52,6 +52,7 @@ module.exports = {
 					orange100: "#fee2e2",
 					orange200: "#fecaca",
 					orange300: "#FDBA74",
+          orange400: "#f87171",
 					orange500: "#9f1127",
 					orange600: "#EA580C"
 				},

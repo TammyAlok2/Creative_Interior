@@ -114,7 +114,7 @@ export default function Dashboard() {
             />
 
             <div className="mt-6">
-              <button className="w-full text-left text-red-500 font-semibold flex gap-[.5rem] ml-3 items-center hover:text-red transition-all duration-500 ease-in-out" onClick={()=>LogOut()}><TbLogout2 className="text-xl" /> Logout</button>
+              <button className="w-full text-left text-red-500 font-semibold flex gap-[.5rem] ml-3 items-center hover:text-orange-orange500 transition-all duration-500 ease-in-out" onClick={()=>LogOut()}><TbLogout2 className="text-xl" /> Logout</button>
             </div>
 
             {/* <div className="mt-4">

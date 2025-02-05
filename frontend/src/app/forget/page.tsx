@@ -55,7 +55,7 @@ const ForgotPasswordPage = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your Email"
-                    className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                    className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-orange-orange500 dark:border-transparent dark:bg-[#2C303B] dark:focus:border-orange-orange500 dark:focus:shadow-none"
                     required
                   />
                 </div>
@@ -63,7 +63,7 @@ const ForgotPasswordPage = () => {
                 <div className="mb-6">
                   <button
                     type="submit"
-                    className="shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90"
+                    className="shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-orange-orange500 px-9 py-4 text-base font-medium text-white duration-300 hover:opacity-[0.9]"
                   >
                     Send Reset Link
                   </button>
@@ -72,7 +72,7 @@ const ForgotPasswordPage = () => {
 
               <p className="text-center text-base font-medium text-body-color">
                 Remember your password?{" "}
-                <Link href="/signin" className="text-primary hover:underline">
+                <Link href="/signin" className="text-orange-orange500 hover:underline">
                   Sign in
                 </Link>
               </p>

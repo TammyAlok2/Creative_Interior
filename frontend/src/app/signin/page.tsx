@@ -66,7 +66,7 @@ const SigninPage = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your Email"
-                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-orange-orange500 dark:border-transparent dark:bg-[#2C303B] dark:focus:border-orange-orange500 dark:focus:shadow-none"
                       required
                       disabled={isLoading}
                     />
@@ -84,7 +84,7 @@ const SigninPage = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your Password"
-                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-orange-orange500 dark:border-transparent dark:bg-[#2C303B] dark:focus:border-orange-orange500 dark:focus:shadow-none"
                       required
                       disabled={isLoading}
                     />
@@ -135,7 +135,7 @@ const SigninPage = () => {
                     <div>
                       <Link
                         href="/forget"
-                        className={`text-sm font-medium text-primary hover:underline ${
+                        className={`text-sm font-medium text-orange-orange500 hover:underline ${
                           isLoading ? 'pointer-events-none opacity-60' : ''
                         }`}
                       >
@@ -148,10 +148,10 @@ const SigninPage = () => {
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className={`shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 ${
+                      className={`shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-orange-orange500 px-9 py-4 text-base font-medium text-white duration-300 ${
                         isLoading
                           ? 'cursor-not-allowed opacity-70'
-                          : 'hover:bg-primary/90'
+                          : 'hover:opacity-[.9]'
                       }`}
                     >
                       {isLoading ? (
@@ -182,7 +182,7 @@ const SigninPage = () => {
                   Don't you have an account?{" "}
                   <Link 
                     href="/signup" 
-                    className={`text-primary hover:underline ${
+                    className={`text-orange-orange500 hover:underline ${
                       isLoading ? 'pointer-events-none opacity-60' : ''
                     }`}
                   >

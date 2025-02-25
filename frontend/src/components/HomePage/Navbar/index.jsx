@@ -1,10 +1,11 @@
-'use client'
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Search, ChevronDown } from 'lucide-react';
-import { useWishlistStore } from '@/stores/wishlistStore';
-import { useCartStore } from '@/stores/cartStore';
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Search, ChevronDown } from "lucide-react";
+import { useWishlistStore } from "@/stores/wishlistStore";
+import { useCartStore } from "@/stores/cartStore";
+import { useAuthStore } from "@/stores/authStore";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,43 +14,36 @@ const Navbar = () => {
 
   const menuItems = {
     shop: {
-      label: 'Shop',
+      label: "Shop",
       items: [
-        { title: 'Customized Wallpaper', items: ['Wallpaper'] },
-        { title: 'Wallpaper', items: ['Wallpaper'] },
-      ]
+        { title: "Customized Wallpaper", items: ["Wallpaper"] },
+        { title: "Wallpaper", items: ["Wallpaper"] },
+      ],
     },
     products: {
-      label: 'Products',
+      label: "Products",
       items: [
-        'Indian Ethnic',
-        'Religious',
-        'Geometric',
-        'Botanical',
-        'Nature',
-        'Sports',
-        'Healthcare',
-        'Abstract'
-      ]
+        "Indian Ethnic",
+        "Religious",
+        "Geometric",
+        "Botanical",
+        "Nature",
+        "Sports",
+        "Healthcare",
+        "Abstract",
+      ],
     },
     more: {
-      label: 'More',
-      items: [
-        'About Us',
-        'Services',
-        'Portfolio',
-        'Blog',
-        'FAQ',
-        'Career'
-      ]
-    }
+      label: "More",
+      items: ["About Us", "Services", "Portfolio", "Blog", "FAQ", "Career"],
+    },
   };
 
   const toggleDropdown = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
-  const {wishlist} = useWishlistStore();
+  const { wishlist } = useWishlistStore();
 
   const { items } = useCartStore();
 
@@ -65,13 +59,15 @@ const Navbar = () => {
   // console.log(wishlist.products)
 
   useEffect(() => {
-      setWishlistCount(
-        wishlist?.products?.length > 0 ? wishlist?.products?.length : ""
-      )
+    setWishlistCount(
+      wishlist?.products?.length > 0 ? wishlist?.products?.length : ""
+    );
   }, [wishlist]);
 
-  console.log("wishlistdata: ", wishlistCount)
-  console.log("cartCount: ", cartCount)
+  const { user } = useAuthStore();
+
+  console.log("wishlistdata: ", wishlistCount);
+  console.log("cartCount: ", cartCount);
 
   return (
     <nav className="fixed top-0 w-full bg-white z-50 px-2 sm:px-4 lg:px-6 py-2 sm:py-4 shadow-md">
@@ -90,7 +86,9 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-          <Link href="/" className="text-orange-500 whitespace-nowrap">Home</Link>
+          <Link href="/" className="text-orange-500 whitespace-nowrap">
+            Home
+          </Link>
 
           {/* Shop Dropdown */}
           <div className="relative group">
@@ -121,7 +119,12 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Link href="/contact" className="text-gray-800 hover:text-orange-500 whitespace-nowrap">Contact</Link>
+          <Link
+            href="/contact"
+            className="text-gray-800 hover:text-orange-500 whitespace-nowrap"
+          >
+            Contact
+          </Link>
 
           {/* Products Dropdown */}
           <div className="relative group">
@@ -133,7 +136,7 @@ const Navbar = () => {
               {menuItems.products.items.map((item, index) => (
                 <Link
                   key={index}
-                  href={`/products/${item.toLowerCase().replace(' ', '-')}`}
+                  href={`/products/${item.toLowerCase().replace(" ", "-")}`}
                   className="block px-4 py-2 hover:text-orange-500 whitespace-nowrap"
                 >
                   {item}
@@ -152,7 +155,7 @@ const Navbar = () => {
               {menuItems.more.items.map((item, index) => (
                 <Link
                   key={index}
-                  href={`/${item.toLowerCase().replace(' ', '-')}`}
+                  href={`/${item.toLowerCase().replace(" ", "-")}`}
                   className="block px-4 py-2 hover:text-orange-500 whitespace-nowrap"
                 >
                   {item}
@@ -185,26 +188,81 @@ const Navbar = () => {
           >
             <Search className="w-6 h-6" />
           </button>
-
-          <Link href="/signin" className="hover:text-orange-500">
-            <span className="flex items-center">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-              <span className="hidden lg:inline ml-1">Login</span>
-            </span>
-          </Link>
-          <Link href="/wishlist" className="relative hover:text-orange-500">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          {user ? (
+            <Link href="/dashboard/profilesection" className="hover:text-orange-500">
+     <span className="flex items-center">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  <span className="hidden lg:inline ml-1">User</span>
+                </span>
+            </Link>
+          ) : (
+            <>
+              <Link href="/signin" className="hover:text-orange-500">
+                <span className="flex items-center">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  <span className="hidden lg:inline ml-1">Login</span>
+                </span>
+              </Link>
+            </>
+          )}
+          <Link
+            href="/dashboard/wishlist"
+            className="relative hover:text-orange-500"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
             </svg>
             <span className="absolute -top-2 -right-2 text-xs rounded-full w-5 h-5 flex items-center justify-center">
               {wishlistCount}
             </span>
           </Link>
           <Link href="/cart" className="relative hover:text-orange-500">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
             </svg>
             <span className="absolute -top-2 -right-2 text-xs rounded-full w-5 h-5 flex items-center justify-center">
               {cartCount}
@@ -216,8 +274,18 @@ const Navbar = () => {
             className="lg:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
         </div>
@@ -225,10 +293,11 @@ const Navbar = () => {
 
       {/* Mobile Search Bar */}
       <div
-        className={`lg:hidden absolute left-0 right-0 bg-white px-4 py-2 shadow-md transition-all duration-300 ease-in-out ${isSearchOpen
-            ? 'translate-x-0 opacity-100'
-            : 'translate-x-full opacity-0 pointer-events-none'
-          }`}
+        className={`lg:hidden absolute left-0 right-0 bg-white px-4 py-2 shadow-md transition-all duration-300 ease-in-out ${
+          isSearchOpen
+            ? "translate-x-0 opacity-100"
+            : "translate-x-full opacity-0 pointer-events-none"
+        }`}
       >
         <div className="flex items-center space-x-2">
           <input
@@ -246,18 +315,24 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 max-h-[80vh] overflow-y-auto">
           <div className="flex flex-col space-y-2 px-4">
-            <Link href="/" className="py-2 text-orange-500">Home</Link>
+            <Link href="/" className="py-2 text-orange-500">
+              Home
+            </Link>
 
             {/* Mobile Shop Dropdown */}
             <div>
               <button
                 className="w-full flex items-center justify-between py-2 text-gray-800"
-                onClick={() => toggleDropdown('shop')}
+                onClick={() => toggleDropdown("shop")}
               >
                 <span>Shop</span>
-                <ChevronDown className={`w-4 h-4 transform transition-transform ${activeDropdown === 'shop' ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  className={`w-4 h-4 transform transition-transform ${
+                    activeDropdown === "shop" ? "rotate-180" : ""
+                  }`}
+                />
               </button>
-              {activeDropdown === 'shop' && (
+              {activeDropdown === "shop" && (
                 <div className="pl-4 py-2 space-y-2">
                   {menuItems.shop.items.map((item, index) => (
                     <div key={index}>
@@ -266,7 +341,13 @@ const Navbar = () => {
                         onClick={() => toggleDropdown(`shop-${index}`)}
                       >
                         <span>{item.title}</span>
-                        <ChevronDown className={`w-4 h-4 transform transition-transform ${activeDropdown === `shop-${index}` ? 'rotate-180' : ''}`} />
+                        <ChevronDown
+                          className={`w-4 h-4 transform transition-transform ${
+                            activeDropdown === `shop-${index}`
+                              ? "rotate-180"
+                              : ""
+                          }`}
+                        />
                       </button>
                       {activeDropdown === `shop-${index}` && (
                         <div className="pl-4 py-2 space-y-2">
@@ -287,23 +368,29 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link href="/contact" className="py-2 text-gray-800">Contact</Link>
+            <Link href="/contact" className="py-2 text-gray-800">
+              Contact
+            </Link>
 
             {/* Mobile Products Dropdown */}
             <div>
               <button
                 className="w-full flex items-center justify-between py-2 text-gray-800"
-                onClick={() => toggleDropdown('products')}
+                onClick={() => toggleDropdown("products")}
               >
                 <span>Products</span>
-                <ChevronDown className={`w-4 h-4 transform transition-transform ${activeDropdown === 'products' ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  className={`w-4 h-4 transform transition-transform ${
+                    activeDropdown === "products" ? "rotate-180" : ""
+                  }`}
+                />
               </button>
-              {activeDropdown === 'products' && (
+              {activeDropdown === "products" && (
                 <div className="pl-4 py-2 space-y-2">
                   {menuItems.products.items.map((item, index) => (
                     <Link
                       key={index}
-                      href={`/products/${item.toLowerCase().replace(' ', '-')}`}
+                      href={`/products/${item.toLowerCase().replace(" ", "-")}`}
                       className="block py-2 text-gray-800"
                     >
                       {item}
@@ -317,17 +404,21 @@ const Navbar = () => {
             <div>
               <button
                 className="w-full flex items-center justify-between py-2 text-gray-800"
-                onClick={() => toggleDropdown('more')}
+                onClick={() => toggleDropdown("more")}
               >
                 <span>More</span>
-                <ChevronDown className={`w-4 h-4 transform transition-transform ${activeDropdown === 'more' ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  className={`w-4 h-4 transform transition-transform ${
+                    activeDropdown === "more" ? "rotate-180" : ""
+                  }`}
+                />
               </button>
-              {activeDropdown === 'more' && (
+              {activeDropdown === "more" && (
                 <div className="pl-4 py-2 space-y-2">
                   {menuItems.more.items.map((item, index) => (
                     <Link
                       key={index}
-                      href={`/${item.toLowerCase().replace(' ', '-')}`}
+                      href={`/${item.toLowerCase().replace(" ", "-")}`}
                       className="block py-2 text-gray-800"
                     >
                       {item}

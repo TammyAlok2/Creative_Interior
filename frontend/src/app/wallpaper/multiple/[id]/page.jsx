@@ -1,3 +1,4 @@
+'use client'
 import HomeDecorSection from "../../../../components/SingleProduct/DecorHomeSection";
 import SimilarProducts from "../../../../components/SingleProduct/SimilarProducts";
 import UserReviews from "../../../../components/SingleProduct/UserReview";

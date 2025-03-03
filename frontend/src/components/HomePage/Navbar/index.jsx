@@ -68,8 +68,7 @@ const Navbar = () => {
 
   const { user } = useAuthStore();
 
-  console.log("wishlistdata: ", wishlistCount);
-  console.log("cartCount: ", cartCount);
+
 
   return (
     <nav className="fixed top-0 w-full bg-white z-50 px-2 sm:px-4 lg:px-6 py-2 sm:py-4 shadow-md">

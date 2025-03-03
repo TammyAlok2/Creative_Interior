@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa6";
 import { FiChevronRight } from "react-icons/fi";
 
 export default function OrderItem({ item }) {
-  console.log(item)
+  
   return (
     <div className="box-shadow border max-[763px]:flex-col max-[763px]:gap-1 hover:scale-[1.01] rounded-lg p-4 flex items-start gap-4 bg-white justify-between transition-all duration-300 ease-in-out mb-4">
       {/* Image */}

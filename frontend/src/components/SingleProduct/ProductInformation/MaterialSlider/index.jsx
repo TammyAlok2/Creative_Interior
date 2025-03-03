@@ -10,7 +10,7 @@ const MaterialSlider = () => {
 
   const { product } = useProductDataStore();
   const { materials, getAllMaterials } = useMaterialStore();
-  console.log("materials: ", materials)
+
 
   useEffect(() => {
     getAllMaterials();

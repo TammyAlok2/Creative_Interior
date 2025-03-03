@@ -11,7 +11,7 @@ const OrdersList = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       const response = await fetchOrders();
-      console.log(response);
+      
     };
     fetchOrder();
   }, [fetchOrders]);

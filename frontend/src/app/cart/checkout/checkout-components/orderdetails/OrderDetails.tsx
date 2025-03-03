@@ -14,6 +14,7 @@ import OrderDetailsFooterIcons from "./components/OrderDetailsIcons";
 import ApplyCoupon from "../ApplyCoupon";
 import CouponAppliedPopup from "../CouponAppliedPopup";
 import { Toaster, toast } from 'react-hot-toast';
+import Script from 'next/script';
 
 interface OrderState {
   isProcessing: boolean;
@@ -24,7 +25,7 @@ interface OrderState {
 export default function OrderDetails() {
   const { items } = useCartStore();
   const [selectedMode, setSelectedMode] = useState<string | null>(null);
-  const { addOrder } = useOrderStore();
+  const { addOrder,verifyPayment } = useOrderStore();
   const { clearCart } = useCartStore();
   const { selectedAddressId } = useSelectedAddressStore();
   const router = useRouter();
@@ -43,6 +44,7 @@ export default function OrderDetails() {
   }>({ type: null, message: null });
 
   const [appliedCoupon, setAppliedCoupon] = useState<any | null>(null);
+  const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
   const calculateOrderAmounts = () => {
     const subtotal = items.reduce(
@@ -100,6 +102,73 @@ export default function OrderDetails() {
     return true;
   };
 
+  const handleRazorpayLoad = () => {
+    setRazorpayLoaded(true);
+  };
+
+  const handleRazorpayPayment = (order: any) => {
+    // console.log(order,'order')
+    if (!window.Razorpay) {
+      toast.error("Razorpay SDK failed to load. Please try again later.");
+      setIsProcessing(false);
+      return;
+    }
+
+    // Use the Razorpay Order ID and Key ID received from your backend
+    const options = {
+      key: order.razorpayKeyId,
+      amount: Math.round(total * 100),
+      currency: "INR",
+      name: "Creative Interior",
+      description: "Purchase Payment",
+      order_id: order.razorpayOrderId,
+      handler: async function (response: any) {
+        try {
+          // Call your backend to verify payment
+          const verificationData = {
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature
+          };
+
+          const verificationResponse = await verifyPayment(verificationData);
+          // console.log(verificationResponse)
+
+          if (!verificationResponse.success) {
+            throw new Error('Payment verification failed');
+          }
+         if(verificationResponse.success){
+           await clearCart();
+           toast.success("Payment successful!");
+           router.push("/dashboard/orders");
+         }
+         
+        } catch (error: any) {
+          console.error("Payment verification error:", error);
+          toast.error(error.message || "Payment verification failed");
+          setIsProcessing(false);
+        }
+      },
+      prefill: {
+        name: "Customer Name",
+        email: "customer@example.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#F37254",
+      },
+      modal: {
+        ondismiss: function() {
+          setIsProcessing(false);
+          toast.error("Payment cancelled");
+        }
+      }
+    };
+
+    const razorpay = new window.Razorpay(options);
+    razorpay.open();
+  };
+
   const createOrder = async () => {
     try {
       setIsProcessing(true);
@@ -125,9 +194,17 @@ export default function OrderDetails() {
       };
   
       const response = await addOrder(orderData);
-      toast.success("Order created successfully");
-      await clearCart();
-      router.push("/dashboard/orders");
+      // console.log(response)
+      
+      if (selectedMode === "Cash on Delivery") {
+        toast.success("Order created successfully");
+        await clearCart();
+        router.push("/dashboard/orders");
+      } else if (selectedMode === "Pay Online") {
+        // Initiate Razorpay payment using the data received from backend
+        handleRazorpayPayment(response?.data);
+        // Note: clearCart will be called after successful payment verification
+      }
   
     } catch (error: any) {
       console.error("Order creation error:", error);
@@ -157,6 +234,10 @@ export default function OrderDetails() {
 
   return (
     <>
+      <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        onLoad={handleRazorpayLoad}
+      />
       <Toaster />
       <div className="p-[2rem] box-shadow border rounded-lg w-[35rem] max-[698px]:w-full max-[1250px]:w-[25rem] mb-6">
         {/* Order Details Section */}
@@ -282,6 +363,13 @@ export default function OrderDetails() {
                 />
                 <span className="ml-2 text-sm">Cash on Delivery</span>
               </label>
+              <label className="flex items-center">
+                <CustomRadioButton
+                  selected={selectedMode === "Pay Online"}
+                  onChange={() => handleSelection("Pay Online")}
+                />
+                <span className="ml-2 text-sm">Pay Online</span>
+              </label>
             </div>
           </div>
         </div>
@@ -319,7 +407,7 @@ export default function OrderDetails() {
             {isProcessing ? (
               <span className="inline-block animate-spin rounded-full h-6 w-6 border-t-2 border-white" />
             ) : (
-              "Proceed To Payment"
+              selectedMode === "Pay Online" ? "Pay Now" : "Proceed To Payment"
             )}
           </button>
         </div>

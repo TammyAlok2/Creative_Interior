@@ -69,7 +69,7 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
 
     // Ensure we have the current state of orders before updating
 
-    return response;
+    return response?.data;
   },
 
   verifyPayment: async (paymentData) => {

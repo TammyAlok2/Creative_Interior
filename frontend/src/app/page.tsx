@@ -35,7 +35,7 @@ const Home = () => {
   return (
 
     <>
-      <main className="min-h-screen ">
+      <div className="min-h-screen ">
         <HeroSection />
         <ProductCategories />
         <WallpaperGrid />
@@ -43,7 +43,7 @@ const Home = () => {
         <Features />
         {/* <WallpaperDesign/> */}
         <BlogSection />
-      </main>
+      </div>
     </>
   )
 }

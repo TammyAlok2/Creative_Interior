@@ -128,12 +128,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Link
-            href="/contact"
-            className="text-gray-800 hover:text-orange-orange500 whitespace-nowrap"
-          >
-            Contact
-          </Link>
+        
 
           {/* Products Dropdown */}
           <div className="relative group">

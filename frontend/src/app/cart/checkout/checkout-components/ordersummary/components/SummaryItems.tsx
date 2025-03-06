@@ -32,9 +32,9 @@ const SummaryItems: React.FC<SummaryItemsProps> = ({ OrderDetailsData }) => {
                   <h3 className="font-semibold opacity-[.9] text-gray-medium text-sm">
                     {item?.product?.name}
                   </h3>
-                  <p className="text-sm text-gray-medium opacity-[.9]">
+                  {/* <p className="text-sm text-gray-medium opacity-[.9]">
                     Qty : {item?.quantity}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </Link>

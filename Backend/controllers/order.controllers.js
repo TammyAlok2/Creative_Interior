@@ -116,10 +116,13 @@ console.log(paymentMethod)
     };
 
     if (paymentMethod === 'ONLINE') {
+      const totalAmount = parseInt(total)
+
       const razorpayOrder = await razorpay.orders.create({
-        amount: total * 100,
+        amount: totalAmount * 100,
         currency: 'INR'
       }).catch(error => {
+       // console.log(error)
         throw new AppError('Razorpay order creation failed: ' + error.message, 500);
       });
       //console.log(razorpayOrder)

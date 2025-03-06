@@ -123,7 +123,7 @@ export default function OrderDetails() {
     // Use the Razorpay Order ID and Key ID received from your backend
     const options = {
       key: order.razorpayKeyId,
-      amount: Math.round(total * 100),
+      amount: parseInt(total * 100),
       currency: "INR",
       name: "Creative Interior",
       description: "Purchase Payment",
@@ -140,10 +140,10 @@ export default function OrderDetails() {
           const verificationResponse = await verifyPayment(verificationData);
           // console.log(verificationResponse)
 
-          if (!verificationResponse.success) {
+          if (!verificationResponse?.success) {
             throw new Error('Payment verification failed');
           }
-         if(verificationResponse.success){
+         if(verificationResponse?.success){
            await clearCart();
            toast.success("Payment successful!");
            router.push("/dashboard/orders");

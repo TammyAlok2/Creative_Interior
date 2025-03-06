@@ -164,7 +164,7 @@ export const verifyOrderPayment = asyncHandler(async (req, res, next) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
   if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-    console.log(razorpay_order_id,razorpay_payment_id,razorpay_signature)
+   // console.log(razorpay_order_id,razorpay_payment_id,razorpay_signature)
     return next(new AppError('Payment verification failed: Missing required fields', 400));
   }
 
@@ -172,7 +172,7 @@ export const verifyOrderPayment = asyncHandler(async (req, res, next) => {
     // Verify the payment signature
     const body = razorpay_order_id + '|' + razorpay_payment_id;
     const expectedSignature = crypto
-      .createHmac('sha256', '0NQdt2hWDAoQyYg1xuydWBwe')
+      .createHmac('sha256', process.env.RAZORPAY_SECRET)
       .update(body.toString())
       .digest('hex');
 

@@ -46,6 +46,8 @@ const OrdersList = () => {
     );
   };
 
+  // console.log("orders", orders);
+
   return (
     <div className="rounded-lg">
       {/* Empty state */}
@@ -62,6 +64,7 @@ const OrdersList = () => {
 
       {/* Orders list */}
       {getVisibleOrders().map(({ order, orderItem, count }) => {
+        console.log("ya bro:", order)
         const mappedItem = {
           ...orderItem,
           images: [orderItem.photo],
@@ -72,6 +75,7 @@ const OrdersList = () => {
           order: order.status,
           orderId: order._id,
           orderItemId: orderItem._id,
+          price: order?.total,
         };
 
         return (

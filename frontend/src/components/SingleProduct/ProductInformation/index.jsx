@@ -110,7 +110,10 @@ const ProductDetail = () => {
   );
 
   const handleAddToCart = () => {
-    addItem(products);
+    addItem({
+      ...products,
+      finalPrice: parseFloat(finalTotal)
+    });
   };
 
   // toggle like

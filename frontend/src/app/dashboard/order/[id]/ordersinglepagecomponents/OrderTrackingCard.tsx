@@ -5,6 +5,7 @@ import OrderCancellation from "./OrderCancellation";
 
 export default function OrderTrackingCard({ orderDetails }: any) {
   const productData = orderDetails?.productId;
+  // console.log("productData: ", productData);
 
   // Dynamic order statuses
   const orderStatuses = [

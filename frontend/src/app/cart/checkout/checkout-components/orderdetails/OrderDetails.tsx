@@ -48,7 +48,13 @@ export default function OrderDetails() {
 
   const calculateOrderAmounts = () => {
     const subtotal = items.reduce(
-      (acc, item) => acc + item.product.price * item.quantity,
+      (acc, item) => {
+        const itemPrice = item.product?.finalPrice !== undefined
+          ? item.product.finalPrice
+          : item.product.price * item.quantity;
+        
+        return acc + itemPrice;
+      },
       0
     );
 
@@ -177,12 +183,22 @@ export default function OrderDetails() {
         setIsProcessing(false);
         return;
       }
-  
-      const orderData = {
-        orderItems: items.map((item) => ({
+
+      // Map order items with finalPrice support
+      const orderItems = items.map((item) => {
+        const itemPrice = item.product?.finalPrice !== undefined
+          ? item.product.finalPrice / item.quantity  // Divide by quantity to get per unit price
+          : item.product.price;
+            
+        return {
           productId: item.product._id,
           quantity: item.quantity,
-        })),
+          price: itemPrice
+        };
+      });
+  
+      const orderData = {
+        orderItems,
         address: selectedAddressId,
         subtotal,
         tax,

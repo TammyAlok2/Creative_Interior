@@ -18,8 +18,10 @@ const Navbar = () => {
     shop: {
       label: "Shop",
       items: [
-        { title: "Customized Wallpaper", items: ["Wallpaper"] },
-        { title: "Wallpaper", items: ["Wallpaper"] },
+        { title: "Wallpaper", items: ["Indian"] },
+        { title: "Blinds", items: [] },
+        { title: "Blinds", items: [] },
+        { title: "Glas Film", items: [] },
       ],
     },
     products: {
@@ -37,7 +39,7 @@ const Navbar = () => {
     },
     more: {
       label: "More",
-      items: ["About Us", "Services", "Portfolio", "Blog", "FAQ", "Career"],
+      items: ["About Us", "Contact Us", "Career", "Customer Review"],
     },
   };
 
@@ -68,9 +70,6 @@ const Navbar = () => {
 
   const { user } = useAuthStore();
 
-  console.log("wishlistdata: ", wishlistCount);
-  console.log("cartCount: ", cartCount);
-
   return (
     <nav className="fixed top-0 w-full bg-white z-50 px-2 sm:px-4 lg:px-6 py-2 sm:py-4 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -99,34 +98,37 @@ const Navbar = () => {
               <ChevronDown className="w-4 h-4" />
             </button>
             <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 transition-all duration-300">
-              {menuItems.shop.items.map((item, index) => (
+              {menuItems?.shop?.items?.map((item, index) => (
                 <div key={index} className="relative group/sub px-4 py-2">
                   <div className="flex items-center justify-between hover:text-orange-orange500 cursor-pointer">
                     <span>{item.title}</span>
-                    <ChevronDown className="w-4 h-4" />
+                    {item?.items?.length > 0 && (
+                      <ChevronDown className="w-4 h-4" />
+                    )}
                   </div>
-                  <div className="invisible group-hover/sub:visible opacity-0 group-hover/sub:opacity-100 absolute left-full top-0 bg-white shadow-lg rounded-lg py-2 w-48 transition-all duration-300">
-                    {item.items.map((subItem, subIndex) => (
-                      <Link
-                        key={subIndex}
-                        href={`/shop/${subItem.toLowerCase()}`}
-                        className="block px-4 py-2 hover:text-orange-orange500"
-                      >
-                        {subItem}
-                      </Link>
-                    ))}
-                  </div>
+                  {item?.items?.length > 0 && (
+                    <div
+                      className={`invisible group-hover/sub:visible opacity-0 group-hover/sub:opacity-100 absolute left-full top-0 bg-white shadow-lg rounded-lg py-2 w-48 ${
+                        item?.items === [] ? "py-0" : ""
+                      } transition-all duration-300`}
+                    >
+                      {item?.items?.map((subItem, subIndex) => (
+                        <Link
+                          key={subIndex}
+                          href={`/shop/${subItem.toLowerCase()}`}
+                          className="block px-4 py-2 hover:text-orange-orange500"
+                        >
+                          {subItem}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
 
-          <Link
-            href="/contact"
-            className="text-gray-800 hover:text-orange-orange500 whitespace-nowrap"
-          >
-            Contact
-          </Link>
+        
 
           {/* Products Dropdown */}
           <div className="relative group">
@@ -135,7 +137,7 @@ const Navbar = () => {
               <ChevronDown className="w-4 h-4" />
             </button>
             <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-48 transition-all duration-300">
-              {menuItems.products.items.map((item, index) => (
+              {menuItems?.products?.items?.map((item, index) => (
                 <Link
                   key={index}
                   href={`/products/${item.toLowerCase().replace(" ", "-")}`}
@@ -154,15 +156,16 @@ const Navbar = () => {
               <ChevronDown className="w-4 h-4" />
             </button>
             <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-48 transition-all duration-300">
-              {menuItems.more.items.map((item, index) => (
-                <Link
-                  key={index}
-                  href={`/${item.toLowerCase().replace(" ", "-")}`}
-                  className="block px-4 py-2 hover:text-orange-orange500 whitespace-nowrap"
-                >
-                  {item}
-                </Link>
-              ))}
+              {menuItems &&
+                menuItems?.more?.items?.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    className="block px-4 py-2 hover:text-orange-orange500 whitespace-nowrap"
+                  >
+                    {item}
+                  </Link>
+                ))}
             </div>
           </div>
         </div>
@@ -173,10 +176,16 @@ const Navbar = () => {
         <div className="flex items-center space-x-2 sm:space-x-4">
           <LargeDeviceSearch />
 
-          <SmallDeviceSearch setIsSearchOpen={setIsSearchOpen} isSearchOpen={isSearchOpen}/>
+          <SmallDeviceSearch
+            setIsSearchOpen={setIsSearchOpen}
+            isSearchOpen={isSearchOpen}
+          />
 
           {user ? (
-            <Link href="/dashboard/profilesection" className="hover:text-orange-orange500">
+            <Link
+              href="/dashboard/profilesection"
+              className="hover:text-orange-orange500"
+            >
               <span className="flex items-center">
                 <svg
                   className="w-6 h-6"
@@ -255,12 +264,8 @@ const Navbar = () => {
               {cartCount}
             </span>
           </Link>
-
-
         </div>
       </div>
-
-
 
       {/* Mobile Menu */}
       {isMenuOpen && (
@@ -278,41 +283,45 @@ const Navbar = () => {
               >
                 <span>Shop</span>
                 <ChevronDown
-                  className={`w-4 h-4 transform transition-transform ${activeDropdown === "shop" ? "rotate-180" : ""
-                    }`}
+                  className={`w-4 h-4 transform transition-transform ${
+                    activeDropdown === "shop" ? "rotate-180" : ""
+                  }`}
                 />
               </button>
               {activeDropdown === "shop" && (
                 <div className="pl-4 py-2 space-y-2">
-                  {menuItems.shop.items.map((item, index) => (
-                    <div key={index}>
-                      <button
-                        className="w-full flex items-center justify-between py-2 text-gray-800"
-                        onClick={() => toggleDropdown(`shop-${index}`)}
-                      >
-                        <span>{item.title}</span>
-                        <ChevronDown
-                          className={`w-4 h-4 transform transition-transform ${activeDropdown === `shop-${index}`
-                            ? "rotate-180"
-                            : ""
+                  {menuItems &&
+                    menuItems?.shop?.items?.map((item, index) => (
+                      <div key={index}>
+                        <button
+                          className="w-full flex items-center justify-between py-2 text-gray-800"
+                          onClick={() => toggleDropdown(`shop-${index}`)}
+                        >
+                          <span>{item.title}</span>
+                          <ChevronDown
+                            className={`w-4 h-4 transform transition-transform ${
+                              activeDropdown === `shop-${index}`
+                                ? "rotate-180"
+                                : ""
                             }`}
-                        />
-                      </button>
-                      {activeDropdown === `shop-${index}` && (
-                        <div className="pl-4 py-2 space-y-2">
-                          {item.items.map((subItem, subIndex) => (
-                            <Link
-                              key={subIndex}
-                              href={`/shop/${subItem.toLowerCase()}`}
-                              className="block py-2 text-gray-800"
-                            >
-                              {subItem}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                          />
+                        </button>
+                        {activeDropdown === `shop-${index}` && (
+                          <div className="pl-4 py-2 space-y-2">
+                            {item &&
+                              item?.items?.map((subItem, subIndex) => (
+                                <Link
+                                  key={subIndex}
+                                  href={`/shop/${subItem.toLowerCase()}`}
+                                  className="block py-2 text-gray-800"
+                                >
+                                  {subItem}
+                                </Link>
+                              ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
                 </div>
               )}
             </div>
@@ -329,21 +338,25 @@ const Navbar = () => {
               >
                 <span>Products</span>
                 <ChevronDown
-                  className={`w-4 h-4 transform transition-transform ${activeDropdown === "products" ? "rotate-180" : ""
-                    }`}
+                  className={`w-4 h-4 transform transition-transform ${
+                    activeDropdown === "products" ? "rotate-180" : ""
+                  }`}
                 />
               </button>
               {activeDropdown === "products" && (
                 <div className="pl-4 py-2 space-y-2">
-                  {menuItems.products.items.map((item, index) => (
-                    <Link
-                      key={index}
-                      href={`/products/${item.toLowerCase().replace(" ", "-")}`}
-                      className="block py-2 text-gray-800"
-                    >
-                      {item}
-                    </Link>
-                  ))}
+                  {menuItems &&
+                    menuItems?.products?.items?.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={`/products/${item
+                          .toLowerCase()
+                          .replace(" ", "-")}`}
+                        className="block py-2 text-gray-800"
+                      >
+                        {item}
+                      </Link>
+                    ))}
                 </div>
               )}
             </div>
@@ -356,21 +369,23 @@ const Navbar = () => {
               >
                 <span>More</span>
                 <ChevronDown
-                  className={`w-4 h-4 transform transition-transform ${activeDropdown === "more" ? "rotate-180" : ""
-                    }`}
+                  className={`w-4 h-4 transform transition-transform ${
+                    activeDropdown === "more" ? "rotate-180" : ""
+                  }`}
                 />
               </button>
               {activeDropdown === "more" && (
                 <div className="pl-4 py-2 space-y-2">
-                  {menuItems.more.items.map((item, index) => (
-                    <Link
-                      key={index}
-                      href={`/${item.toLowerCase().replace(" ", "-")}`}
-                      className="block py-2 text-gray-800"
-                    >
-                      {item}
-                    </Link>
-                  ))}
+                  {menuItems &&
+                    menuItems?.more?.items?.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={`/${item.toLowerCase().replace(" ", "-")}`}
+                        className="block py-2 text-gray-800"
+                      >
+                        {item}
+                      </Link>
+                    ))}
                 </div>
               )}
             </div>

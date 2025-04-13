@@ -125,7 +125,7 @@ const SmallDeviceSearch = ({ setIsSearchOpen, isSearchOpen }) => {
     };
 
     return (
-        <div>
+        <div className='mt-[0.5rem]'>
             {/* Mobile Search Bar */}
             <div
                 ref={searchRef}

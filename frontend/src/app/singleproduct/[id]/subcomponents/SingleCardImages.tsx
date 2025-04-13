@@ -18,7 +18,7 @@ const SingleCardImages: React.FC<SingleCardImagesProps> = ({ SingleProduct, left
   // console.log(SingleProduct,'single product')
 
   // console.log(productQuantity)
-  const { addItem, items,allCartItems } = useCartStore();
+  const { addItem, items, allCartItems } = useCartStore();
   // console.log(items)
 
 

@@ -85,7 +85,7 @@ export default function OrderSinglePage() {
       try {
         setLoading(true);
         const data = await fetchProductsByOrders(orderId, orderItemId);
-        // console.log(data);
+        console.log(data);
         setOrderDetails(data); // Update order details
       } catch (err: any) {
         console.error("Error fetching order details:", err.message);

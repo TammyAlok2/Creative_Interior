@@ -74,7 +74,7 @@ const ApplyCoupon: React.FC<ApplyCouponProps> = ({
     handleSetApplyCouponFunction(handleCouponCode(couponCode));
   },[])
 
-  console.log(coupons)
+
 
   return (
     <div className="">

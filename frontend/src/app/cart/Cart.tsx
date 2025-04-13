@@ -23,8 +23,17 @@ const CartPage: React.FC = () => {
 
   // Filter out items with null products and calculate subtotal
   const validItems = items.filter(item => item.product != null);
+  console.log(items)
+  // Modified subtotal calculation to use finalPrice if available
   const subtotal = validItems.reduce(
-    (total, item) => total + (item.product?.price || 0) * (item.quantity || 1),
+    (total, item) => {
+      // Check if finalPrice exists on the product
+      const itemPrice = item.product?.finalPrice !== undefined 
+        ? item.product.finalPrice 
+        : (item.product?.price || 0) * (item.quantity || 1);
+      
+      return total + itemPrice;
+    },
     0
   );
 
@@ -49,9 +58,14 @@ const CartPage: React.FC = () => {
                 images = [],
                 description = '',
                 price = 0,
+                finalPrice,
               },
               quantity = 1,
             } = item;
+
+            const displayPrice = finalPrice !== undefined 
+              ? finalPrice 
+              : price * quantity;
 
             return (
               <CartItem
@@ -60,7 +74,7 @@ const CartPage: React.FC = () => {
                 image={images[0]?.secure_url || ''}
                 name={name}
                 description={description}
-                price={price * quantity}
+                price={displayPrice}
                 quantity={quantity}
                 onQuantityChange={(newQuantity) =>
                   handleQuantityChange(_id, newQuantity)

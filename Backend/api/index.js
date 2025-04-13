@@ -31,6 +31,9 @@ const allowedOrigins = [
     'https://creative-interior.vercel.app',
     'https://www.creativeinteriorssatna.com',
     'https://creativeinteriorssatna.com',
+    'https://www.admin.creativeinteriorssatna.com',
+    'https://admin.creativeinteriorssatna.com',
+    'https://creative-interior-admin.vercel.app'
 ];
 
 app.use(

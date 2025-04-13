@@ -8,7 +8,7 @@ import {
 import { isLoggedIn } from "../middlewares/auth.middlewares.js";
 import { addProductToWishlist, getUserWishlist, removeProductFromWishlist } from "../controllers/wishlist.controllers.js";
 import { addAddress, deleteAddress, editAddress, getAddresses } from "../controllers/address.controllers.js";
-import { addOrder, allOrders, deleteOrder, editOrder, getOrderById, getProductItemByOrderIdAndProductItemId } from "../controllers/order.controllers.js";
+import { addOrder, allOrders, deleteOrder, editOrder, getOrderById, getProductItemByOrderIdAndProductItemId,verifyOrderPayment } from "../controllers/order.controllers.js";
 import { addReview, deleteReview, getReviewsByProduct, getReviewsByUser } from "../controllers/review.controllers.js";
 import { applyCoupon, getAllCoupons } from "../controllers/coupon.controllers.js";
 
@@ -50,7 +50,7 @@ router.get("/getReviewByProduct/:productId",getReviewsByProduct);
 
 
 // Payment routes 
-//router.post('/verify-payment',isLoggedIn,verifyOrderPayment)
+router.post('/verify-payment',isLoggedIn,verifyOrderPayment)
 
 // coupon routes 
 router.get('/allCoupons',getAllCoupons)

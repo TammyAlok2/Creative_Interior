@@ -54,7 +54,7 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
       </Link>
       <div className="flex gap-4 items-center">
-        <div className="flex items-center space-x-2">
+        {/* <div className="flex items-center space-x-2">
           <button
             className="px-3 py-1 bg-gray-200 text-sm rounded"
             onClick={handleDecrease}
@@ -68,7 +68,7 @@ const CartItem: React.FC<CartItemProps> = ({
           >
             +
           </button>
-        </div>
+        </div> */}
         <p className="font-semibold text-lg w-[4rem]">₹{price.toFixed(2)}</p>
         <button
           onClick={onDelete}

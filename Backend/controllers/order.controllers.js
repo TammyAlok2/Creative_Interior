@@ -6,6 +6,9 @@ import Product from '../models/product.models.js';
 import Razorpay from 'razorpay';
 import mongoose from 'mongoose';
 import crypto from 'crypto'
+import { configDotenv } from 'dotenv';
+
+configDotenv()
 /**
  * @Add Order 
  * @ROUTE @POST {{URL}}/api/user/add-order
@@ -13,8 +16,8 @@ import crypto from 'crypto'
  */
 
 const razorpay = new Razorpay({
-  key_id: 'rzp_test_4pXWRuOFyNs2sh',
-  key_secret: '0NQdt2hWDAoQyYg1xuydWBwe',
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_SECRET,
 });
 
 
@@ -25,22 +28,24 @@ export const addOrder = asyncHandler(async (req, res, next) => {
     address,
     subtotal,
     tax,
-    couponDiscount,
     shippingCharges,
     discount,
+    couponDiscount,
     total,
     orderItems,
+    paymentMethod
   } = req.body;
-  console.log(couponDiscount)
-
   const userId = req.user.id;
-
+console.log(paymentMethod)
   // Early validation
-  if (!address || !total || !orderItems || orderItems.length === 0) {
+  if (!address || !total || !orderItems || !paymentMethod || orderItems.length === 0) {
     return next(new AppError('All fields are required', 400));
   }
 
-  // Validate order items
+  if (!['COD', 'ONLINE'].includes(paymentMethod)) {
+    return next(new AppError('Invalid payment method', 400));
+  }
+
   if (!orderItems.every(item => item.productId && item.quantity > 0)) {
     return next(new AppError('Each order item must have valid productId and quantity', 400));
   }
@@ -48,17 +53,15 @@ export const addOrder = asyncHandler(async (req, res, next) => {
   // Extract all product IDs
   const productIds = orderItems.map(item => item.productId);
 
-  // Start transaction
   const session = await mongoose.startSession();
   session.startTransaction();
 
   try {
     // Fetch all products in one query
-    const products = await Product.find({
-      _id: { $in: productIds }
+    const products = await Product.find({ 
+      _id: { $in: productIds } 
     }).session(session);
 
-    // Verify all products exist
     if (products.length !== productIds.length) {
       throw new AppError('One or more products not found', 404);
     }
@@ -73,20 +76,18 @@ export const addOrder = asyncHandler(async (req, res, next) => {
     const preparedOrderItems = orderItems.map(item => {
       const product = productMap[item.productId];
       
-      // Check stock availability
       if (product.stock < item.quantity) {
         throw new AppError(`Insufficient stock for product: ${product.name}`, 400);
       }
 
-      // Prepare order item with product details
       return {
         ...item,
         name: product.name,
         photo: product.photo,
         price: product.price,
         productId: product._id,
-        orderStatus: 'Processing', // Default status
-        paymentStatus: 'Pending',  // Default payment status
+        orderStatus: product.orderStatus || 'Pending',
+        paymentStatus: product.paymentStatus || 'Pending',
         orderDate: new Date()
       };
     });
@@ -101,8 +102,7 @@ export const addOrder = asyncHandler(async (req, res, next) => {
 
     await Product.bulkWrite(bulkUpdateOps, { session });
 
-    // Create order
-    const orderData = {
+    let orderData = {
       address,
       user: userId,
       subtotal,
@@ -110,28 +110,96 @@ export const addOrder = asyncHandler(async (req, res, next) => {
       shippingCharges,
       discount,
       total,
+      paymentMethod,
       couponDiscount,
-      paymentMethod: 'COD',
       orderItems: preparedOrderItems
     };
 
+    if (paymentMethod === 'ONLINE') {
+      const totalAmount = parseInt(total)
+
+      const razorpayOrder = await razorpay.orders.create({
+        amount: totalAmount * 100,
+        currency: 'INR'
+      }).catch(error => {
+       // console.log(error)
+        throw new AppError('Razorpay order creation failed: ' + error.message, 500);
+      });
+      //console.log(razorpayOrder)
+
+      orderData.razorpay = {
+        orderId: razorpayOrder.id
+      };
+    }
+
     const order = new Order(orderData);
     await order.save({ session });
-
-    // Commit transaction
     await session.commitTransaction();
+
+    if (paymentMethod === 'ONLINE') {
+      
+      return res.status(200).json(new AppResponse(200, {
+        order,
+        razorpayOrderId: order.razorpay.orderId,
+      
+
+      }, 'Order created successfully, proceed with payment'));
+    }
 
     return res.status(200).json(
       new AppResponse(200, order, 'Order placed successfully via Cash on Delivery')
     );
 
   } catch (error) {
-    // Rollback transaction on error
     await session.abortTransaction();
     console.error('Order processing error:', error);
     return next(error instanceof AppError ? error : new AppError(error.message || 'Error processing order', 500));
   } finally {
     session.endSession();
+  }
+});
+
+// Add this new controller method for handling payment verification
+export const verifyOrderPayment = asyncHandler(async (req, res, next) => {
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+
+  if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+   // console.log(razorpay_order_id,razorpay_payment_id,razorpay_signature)
+    return next(new AppError('Payment verification failed: Missing required fields', 400));
+  }
+
+  try {
+    // Verify the payment signature
+    const body = razorpay_order_id + '|' + razorpay_payment_id;
+    const expectedSignature = crypto
+      .createHmac('sha256', process.env.RAZORPAY_SECRET)
+      .update(body.toString())
+      .digest('hex');
+
+    if (expectedSignature !== razorpay_signature) {
+      return next(new AppError('Payment verification failed: Invalid signature', 400));
+    }
+
+    // Update order with payment details
+    const order = await Order.findOneAndUpdate(
+      { 'razorpay.orderId': razorpay_order_id },
+      {
+        $set: {
+          'razorpay.paymentId': razorpay_payment_id,
+          'razorpay.signature': razorpay_signature,
+          'orderItems.$[].paymentStatus': 'Paid'
+        }
+      },
+      { new: true }
+    );
+
+    if (!order) {
+      return next(new AppError('Order not found', 404));
+    }
+
+    res.status(200).json(new AppResponse(200, order, 'Payment verified successfully'));
+  } catch (error) {
+    return next(new AppError('Error verifying payment: ' + error.message, 500));
   }
 });
 

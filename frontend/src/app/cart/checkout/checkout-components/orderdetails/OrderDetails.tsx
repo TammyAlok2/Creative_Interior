@@ -282,6 +282,14 @@ export default function OrderDetails() {
                 />
                 <span className="ml-2 text-sm">Cash on Delivery</span>
               </label>
+
+              <label className="flex items-center">
+                <CustomRadioButton
+                  selected={selectedMode === "ONLINE"}
+                  onChange={() => handleSelection("ONLINE")}
+                />
+                <span className="ml-2 text-sm">Online</span>
+              </label>
             </div>
           </div>
         </div>

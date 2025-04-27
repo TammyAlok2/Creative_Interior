@@ -33,7 +33,7 @@ const prodOptions = {
   sameSite: 'None',
   maxAge: 7 * 24 * 60 * 60 * 1000,
   path: "/",
-  domain: process.env.COOKIE_DOMAIN || "creativeinteriorssatna.com"
+  domain: process.env.COOKIE_DOMAIN || "creative-interior-h96r.vercel.app"
 
 };
 

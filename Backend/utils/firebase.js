@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth"; // Add this for authentication
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAi5_R3mdUXTTpen8MddCAfM1suYjsX6SY",
-  authDomain: "creative-interior-c2ade.firebaseapp.com",
-  projectId: "creative-interior-c2ade",
-  storageBucket: "creative-interior-c2ade.firebasestorage.app",
-  messagingSenderId: "1094735596413",
-  appId: "1:1094735596413:web:c245a33d114cb5255d9a14",
-  measurementId: "G-V5KV67CRSE"
+  apiKey: "AIzaSyBQCZlunSOtQOtwplmw5SmFfEnYeSRF0hA",
+  authDomain: "creative-interior-c54e6.firebaseapp.com",
+  projectId: "creative-interior-c54e6",
+  storageBucket: "creative-interior-c54e6.firebasestorage.app",
+  messagingSenderId: "496839591542",
+  appId: "1:496839591542:web:6e194f8fe2eb534cd68157",
+  measurementId: "G-RN1BQ7RGXP"
 };
 
 // Initialize Firebase
@@ -20,3 +20,5 @@ const auth = getAuth(firebase); // Add authentication
 
 
 export { firebase, auth }; // Export all services
+
+

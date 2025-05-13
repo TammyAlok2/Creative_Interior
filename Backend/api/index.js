@@ -30,6 +30,8 @@ const allowedOrigins = [
     'http://localhost:3001',
     'https://creative-interior.vercel.app',
     'https://creative-interior-h96r.vercel.app',
+    'https://creativeinterior.aloktamrakar.me',
+    'https://admin.creativeinterior.aloktamrakar.me',
    
     'https://creative-interior-admin.vercel.app'
 ];

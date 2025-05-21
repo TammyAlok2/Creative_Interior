@@ -94,10 +94,12 @@ const Navbar = () => {
           {/* Shop Dropdown */}
           <div className="relative group">
             <button className="flex items-center text-gray-800 group-hover:text-orange-orange500 space-x-1">
-              <span>Shop</span>
-              <ChevronDown className="w-4 h-4" />
+              <Link href={"/about-us"}>
+                <span>About</span>
+              </Link>
+              {/* <ChevronDown className="w-4 h-4" /> */}
             </button>
-            <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 transition-all duration-300">
+            {/* <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-64 transition-all duration-300">
               {menuItems?.shop?.items?.map((item, index) => (
                 <div key={index} className="relative group/sub px-4 py-2">
                   <div className="flex items-center justify-between hover:text-orange-orange500 cursor-pointer">
@@ -125,18 +127,17 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
-
-        
 
           {/* Products Dropdown */}
           <div className="relative group">
             <button className="flex items-center text-gray-800 group-hover:text-orange-orange500 space-x-1">
-              <span>Products</span>
-              <ChevronDown className="w-4 h-4" />
+              <Link href={"/blog"}>
+                <span>Blog</span>
+              </Link>
             </button>
-            <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-48 transition-all duration-300">
+            {/* <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 absolute top-full left-0 bg-white shadow-lg rounded-lg py-2 w-48 transition-all duration-300">
               {menuItems?.products?.items?.map((item, index) => (
                 <Link
                   key={index}
@@ -146,11 +147,11 @@ const Navbar = () => {
                   {item}
                 </Link>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* More Dropdown */}
-          <div className="relative group">
+          {/* <div className="relative group">
             <button className="flex items-center text-gray-800 group-hover:text-orange-orange500 space-x-1">
               <span>More</span>
               <ChevronDown className="w-4 h-4" />
@@ -167,7 +168,7 @@ const Navbar = () => {
                   </Link>
                 ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Search Bar - Only visible on desktop/large screens */}

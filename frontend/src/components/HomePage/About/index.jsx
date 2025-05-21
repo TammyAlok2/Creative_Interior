@@ -14,7 +14,7 @@ const AboutSection = () => {
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           {/* Left Content */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center mt-3">
             <span className="mb-4 text-gray-500 uppercase tracking-wider">OUR STORIES</span>
             
             <h1 className="mb-6 text-4xl sm:text-5xl lg:text-6xl font-bold text-sky-400 leading-tight">
@@ -23,9 +23,7 @@ const AboutSection = () => {
             </h1>
             
             <p className="mb-8 text-gray-600 max-w-lg">
-              Sed cursus turpis vitae tortor. Curabitur ligula sapien, tincidunt non, euismod posuere 
-              imperdiet, leo. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam cursus 
-              lacinia erat. Nulla sit amet est.
+            Creative Interiors exemplifies a modern approach to interior design retail, combining aesthetic appeal with functional e-commerce solutions. The platform categorizes products into themes such as Indian Ethnic, Religious, Geometric, Botanical, Nature, Sports, Healthcare, and Abstract, catering to diverse aesthetic preferences.
             </p>
             
             <div>
